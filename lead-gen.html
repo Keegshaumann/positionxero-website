@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="author" content="Position Xero" />
+  <meta name="theme-color" content="#0D0D0D" />
+  <meta property="og:site_name" content="Position Xero" />
+  <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="Lead Generation Agency" />
   <meta property="og:description" content="Position Xero generates qualified leads for US service businesses through paid ads, cold outreach, SEO, and high-converting landing pages. 20–50 qualified leads per month, guaranteed." />
   <meta property="og:type" content="website" />
@@ -15,23 +20,30 @@
   <meta name="twitter:description" content="Position Xero generates qualified leads for US service businesses through paid ads, cold outreach, SEO, and high-converting landing pages. 20–50 qualified leads per month, guaranteed." />
   <meta name="twitter:image" content="https://www.positionxero.com/img/og-image.jpg" />
 
-  <title>Lead Generation Agency | Qualified Leads on Demand | Position Xero</title>
+  <title>Lead Generation Agency | Qualified Leads | Position Xero</title>
   <meta name="description" content="Position Xero generates qualified leads for US service businesses through paid ads, cold outreach, SEO, and high-converting landing pages. 20–50 qualified leads per month, guaranteed." />
   <link rel="canonical" href="https://www.positionxero.com/lead-gen.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" /></noscript>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%230D0D0D'/><text x='50' y='72' font-size='58' font-family='Arial' font-weight='900' fill='white' text-anchor='middle'>X</text></svg>" />
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png" />
+  <link rel="manifest" href="/site.webmanifest" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Lead Generation Services",
     "serviceType": "Lead Generation",
-    "provider": { "@type": "Organization", "name": "Position Xero", "url": "https://www.positionxero.com" },
+    "provider": { "@id": "https://www.positionxero.com/#organization" },
     "description": "End-to-end lead generation for US service businesses. Paid ads, cold outreach, SEO, and landing page design.",
-    "areaServed": "US"
+    "areaServed": { "@type": "Country", "name": "United States" },
+    "url": "https://www.positionxero.com/lead-gen.html",
+    "mainEntityOfPage": "https://www.positionxero.com/lead-gen.html"
   }
   </script>
   <script type="application/ld+json">
@@ -85,7 +97,8 @@
   </script>
 </head>
 <body class="dark-nav">
-<nav class="nav" id="nav">
+<a href="#main" class="skip-link">Skip to content</a>
+<nav class="nav" id="nav" aria-label="Primary">
   <div class="container">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">Position <span class="gradient-text">Xero</span></a>
@@ -98,7 +111,7 @@
         <li><a href="blog/">Blog</a></li>
       </ul>
       <a href="contact.html" class="btn-primary nav-cta">Book Free Audit →</a>
-      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
@@ -110,13 +123,20 @@
 
 <header class="page-header">
   <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/services.html">Services</a></li>
+        <li aria-current="page">Lead Generation</li>
+      </ol>
+    </nav>
     <span class="section-label">Lead Generation</span>
-    <h1>Qualified Leads,<br /><span class="gradient-text">On Demand.</span></h1>
+    <h1>Lead Generation That Delivers<br /><span class="gradient-text">Qualified Leads, On Demand.</span></h1>
     <p>We fill your pipeline with prospects who are ready to buy, not tyre-kickers. 20–50 qualified leads per month, every month. Last updated: January 2026.</p>
   </div>
 </header>
 
-<main>
+<main id="main">
   <!-- DEFINITION -->
   <section class="section">
     <div class="container">
@@ -127,7 +147,7 @@
       <div class="section-header fade-in" style="margin-top:64px;">
         <span class="section-label">Our Channels</span>
         <h2>How We Generate Your Leads</h2>
-        <p>We use a multi-channel approach because relying on one source is a business risk. We diversify your lead flow across five proven channels.</p>
+        <p>We use a multi-channel approach because relying on one source is a business risk. We diversify your lead flow across five proven channels. If you run a smaller operation, start with our guide to <a href="/blog/lead-generation-for-small-business.html">lead generation for small business</a>.</p>
       </div>
 
       <div class="services-grid">
@@ -137,7 +157,7 @@
         </div>
         <div class="card fade-in delay-1">
           <h3>Cold Email Outreach</h3>
-          <p>Personalised cold email sequences targeting your ideal client profile. When done right, cold email generates some of the highest-quality leads at the lowest cost.</p>
+          <p>Personalized cold email sequences targeting your ideal client profile. When done right, cold email generates some of the highest-quality leads at the lowest cost.</p>
         </div>
         <div class="card fade-in delay-2">
           <h3>Cold DM (LinkedIn &amp; Instagram)</h3>
@@ -149,7 +169,7 @@
         </div>
         <div class="card fade-in delay-1">
           <h3>Landing Pages</h3>
-          <p>High-converting landing pages engineered to turn traffic into leads. Split-tested headlines, compelling offers, and frictionless forms that maximise conversion rate.</p>
+          <p>High-converting landing pages engineered to turn traffic into leads. Split-tested headlines, compelling offers, and frictionless forms that maximize conversion rate.</p>
         </div>
         <div class="card fade-in delay-2">
           <h3>Lead Qualification</h3>
@@ -165,7 +185,7 @@
       <div class="section-header fade-in">
         <span class="section-label">Our Process</span>
         <h2>The Lead Qualification Process</h2>
-        <p>A lead is only valuable if it meets your criteria. Here is how we ensure quality over quantity.</p>
+        <p>A lead is only valuable if it meets your criteria. Here is how we ensure quality over quantity, and how it stacks up against <a href="/blog/cost-per-lead-benchmarks.html">cost per lead benchmarks</a> across industries.</p>
       </div>
       <div class="process-grid">
         <div class="process-card fade-in">
@@ -193,7 +213,7 @@
       <div class="section-header fade-in">
         <span class="section-label">Industries</span>
         <h2>Industries We Generate Leads For</h2>
-        <p>Deep niche expertise means lower cost per lead and higher lead quality, we already know your buyer's language and pain points.</p>
+        <p>Deep niche expertise means lower cost per lead and higher lead quality, we already know your buyer's language and pain points. Dive deeper into our playbooks for <a href="/blog/law-firm-lead-generation.html">law firm lead generation</a> and <a href="/blog/real-estate-lead-generation.html">real estate lead generation</a>.</p>
       </div>
       <div class="niches-grid">
         <div class="niche-card fade-in">
@@ -237,20 +257,20 @@
       </div>
       <div class="faq-list fade-in">
         <div class="faq-item">
-          <button class="faq-question">What is lead generation? <span class="faq-icon">+</span></button>
-          <div class="faq-answer"><p>Lead generation is the process of attracting and converting strangers into prospects who have expressed interest in your product or service. It involves identifying your target audience, reaching them through the right channels (ads, SEO, cold outreach), and capturing their details through landing pages, forms, or direct contact so your sales team can follow up and close.</p></div>
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-1">What is lead generation? <span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-answer" id="faq-ans-1" role="region"><p>Lead generation is the process of attracting and converting strangers into prospects who have expressed interest in your product or service. It involves identifying your target audience, reaching them through the right channels (ads, SEO, cold outreach), and capturing their details through landing pages, forms, or direct contact so your sales team can follow up and close.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">How do you qualify leads? <span class="faq-icon">+</span></button>
-          <div class="faq-answer"><p>We qualify leads through targeting criteria (ensuring only the right audience sees your campaigns), pre-qualification questions on landing pages, and initial follow-up sequences. A qualified lead meets your criteria for Budget, Authority, Need, and Timeline, the BANT framework. Only prospects who pass these criteria are passed to your sales team.</p></div>
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-2">How do you qualify leads? <span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-answer" id="faq-ans-2" role="region"><p>We qualify leads through targeting criteria (ensuring only the right audience sees your campaigns), pre-qualification questions on landing pages, and initial follow-up sequences. A qualified lead meets your criteria for Budget, Authority, Need, and Timeline, the BANT framework. Only prospects who pass these criteria are passed to your sales team.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">How many leads can I expect per month? <span class="faq-icon">+</span></button>
-          <div class="faq-answer"><p>Our starter campaigns typically generate 20 to 50 qualified leads per month, depending on your industry, ad spend, and target market. We set realistic expectations during the initial audit call based on your specific niche and budget, not inflated promises.</p></div>
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-3">How many leads can I expect per month? <span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-answer" id="faq-ans-3" role="region"><p>Our starter campaigns typically generate 20 to 50 qualified leads per month, depending on your industry, ad spend, and target market. We set realistic expectations during the initial audit call based on your specific niche and budget, not inflated promises.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">What's the difference between a lead and a qualified lead? <span class="faq-icon">+</span></button>
-          <div class="faq-answer"><p>A lead is anyone who has submitted their details. A qualified lead is someone who has confirmed they have the budget, decision-making authority, genuine need, and timeline to buy your service. We build qualification into the front of our funnels so you spend your time selling to people who can actually become clients.</p></div>
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-4">What's the difference between a lead and a qualified lead? <span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-answer" id="faq-ans-4" role="region"><p>A lead is anyone who has submitted their details. A qualified lead is someone who has confirmed they have the budget, decision-making authority, genuine need, and timeline to buy your service. We build qualification into the front of our funnels so you spend your time selling to people who can actually become clients.</p></div>
         </div>
       </div>
     </div>
@@ -277,7 +297,7 @@
         <p>We Don't Just Run Ads.<br />We Build Revenue Machines.</p>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <p class="footer-heading">Services</p>
         <ul>
           <li><a href="ads.html">Google Ads</a></li>
           <li><a href="ads.html">Meta Ads</a></li>
@@ -287,7 +307,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <p class="footer-heading">Company</p>
         <ul>
           <li><a href="about.html">About</a></li>
           <li><a href="blog/">Blog</a></li>
@@ -296,17 +316,18 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Get In Touch</h4>
+        <p class="footer-heading">Get In Touch</p>
         <ul>
           <li><a href="mailto:hello@positionxero.com">hello@positionxero.com</a></li>
           <li><a href="tel:+17815078289">+1 (781) 507-8289</a></li>
+          <li>1558 Trail Ridge Rd, Alpine, WY 83128</li>
           <li><a href="https://wa.me/17815078289">WhatsApp Us</a></li>
           <li><a href="contact.html" class="btn-primary" style="margin-top:12px;font-size:13px;padding:10px 20px;">Book Free Audit →</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 Position Xero. All rights reserved.</span>
+      <span>© 2026 Position Xero. All rights reserved.</span>
       <span>America's Performance Marketing Agency</span>
     </div>
   </div>

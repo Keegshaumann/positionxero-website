@@ -1,12 +1,16 @@
-/* Peak Leads — main.js */
+/* Position Xero — main.js */
 
 // Hero cloth-warp grid effect
 (function () {
   const canvas = document.getElementById('heroGrid');
   if (!canvas) return;
 
+  // Respect reduced-motion preferences — skip the animation entirely.
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
   const hero   = canvas.closest('.hero');
   const ctx    = canvas.getContext('2d');
+  if (!hero) return;
 
   // Grid geometry
   const CELL   = 68;   // px between grid lines
@@ -91,35 +95,48 @@
       drawWarpedLine(c * CELL, 0, c * CELL, H);
     }
 
-    requestAnimationFrame(draw);
+    if (running) rafId = requestAnimationFrame(draw);
   }
+
+  let rafId = null, running = false;
+  function start() { if (!running) { running = true; rafId = requestAnimationFrame(draw); } }
+  function stop()  { running = false; if (rafId) cancelAnimationFrame(rafId); rafId = null; }
 
   resize();
   window.addEventListener('resize', resize);
-  requestAnimationFrame(draw);
+
+  // Only animate while the hero is on-screen (saves CPU/battery off-screen).
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      entries.forEach(e => (e.isIntersecting ? start() : stop()));
+    }, { threshold: 0 }).observe(hero);
+  } else {
+    start();
+  }
 })();
 
 // Mobile nav
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 if (hamburger && mobileMenu) {
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    mobileMenu.classList.toggle('open');
-    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
-  });
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('active');
-      mobileMenu.classList.remove('open');
-      document.body.style.overflow = '';
-    });
+  const setMenu = (open) => {
+    hamburger.classList.toggle('active', open);
+    mobileMenu.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  hamburger.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
+  mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+  // Escape closes the menu and returns focus to the toggle.
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) { setMenu(false); hamburger.focus(); }
   });
 }
 
 // Sticky nav
 const nav = document.getElementById('nav');
-if (nav) window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+if (nav) window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
 
 // Fade-in on scroll
 const fadeObserver = new IntersectionObserver((entries) => {
@@ -135,15 +152,24 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// FAQ accordion
-document.querySelectorAll('.faq-question').forEach(btn => {
+// FAQ accordion (with aria-expanded sync for screen readers)
+const faqButtons = document.querySelectorAll('.faq-question');
+function syncFaqAria() {
+  faqButtons.forEach(b => {
+    const it = b.closest('.faq-item');
+    b.setAttribute('aria-expanded', it && it.classList.contains('open') ? 'true' : 'false');
+  });
+}
+faqButtons.forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.closest('.faq-item');
     const isOpen = item.classList.contains('open');
     document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
     if (!isOpen) item.classList.add('open');
+    syncFaqAria();
   });
 });
+syncFaqAria();
 
 // Animated counters
 function animateCounter(el) {

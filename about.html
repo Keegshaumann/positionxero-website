@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="author" content="Position Xero" />
+  <meta name="theme-color" content="#0D0D0D" />
+  <meta property="og:site_name" content="Position Xero" />
+  <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="About Position Xero" />
   <meta property="og:description" content="Position Xero is an American performance marketing agency built on one principle: measurable results. Learn our story, our values, and why 50+ businesses trust us with their growth." />
   <meta property="og:type" content="website" />
@@ -16,20 +21,26 @@
   <meta name="twitter:image" content="https://www.positionxero.com/img/og-image.jpg" />
 
   <title>About Position Xero | America's Performance Marketing Agency</title>
-  <meta name="description" content="Position Xero is an American performance marketing agency built on one principle: measurable results. Learn our story, our values, and why 50+ businesses trust us with their growth." />
+  <meta name="description" content="Position Xero is an American performance marketing agency built on one principle: measurable results. Learn our story, our values, and our approach." />
   <link rel="canonical" href="https://www.positionxero.com/about.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" /></noscript>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%230D0D0D'/><text x='50' y='72' font-size='58' font-family='Arial' font-weight='900' fill='white' text-anchor='middle'>X</text></svg>" />
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png" />
+  <link rel="manifest" href="/site.webmanifest" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "AboutPage",
     "name": "About Position Xero",
-    "description": "About Position Xero, a US performance marketing agency specialising in Google Ads, Meta Ads, lead generation, SEO, and website design. Based in Alpine, Wyoming.",
-    "publisher": { "@type": "Organization", "name": "Position Xero", "url": "https://www.positionxero.com" }
+    "description": "About Position Xero, a US performance marketing agency specializing in Google Ads, Meta Ads, lead generation, SEO, and website design. Based in Alpine, Wyoming.",
+    "mainEntity": { "@id": "https://www.positionxero.com/#organization" },
+    "publisher": { "@id": "https://www.positionxero.com/#organization" }
   }
   </script>
   <script type="application/ld+json">
@@ -54,7 +65,8 @@
   </script>
 </head>
 <body class="dark-nav">
-<nav class="nav" id="nav">
+<a href="#main" class="skip-link">Skip to content</a>
+<nav class="nav" id="nav" aria-label="Primary">
   <div class="container">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">Position <span class="gradient-text">Xero</span></a>
@@ -67,7 +79,7 @@
         <li><a href="blog/">Blog</a></li>
       </ul>
       <a href="contact.html" class="btn-primary nav-cta">Book Free Audit →</a>
-      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
@@ -79,13 +91,19 @@
 
 <header class="page-header">
   <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">About</li>
+      </ol>
+    </nav>
     <span class="section-label">About Us</span>
     <h1>We Don't Just Run Ads.<br /><span class="gradient-text">We Build Revenue Machines.</span></h1>
-    <p>Position Xero was built on one frustration: watching good businesses get burned by agencies that optimised for their own margins instead of client results.</p>
+    <p>Position Xero was built on one frustration: watching good businesses get burned by agencies that optimized for their own margins instead of client results.</p>
   </div>
 </header>
 
-<main>
+<main id="main">
   <!-- OUR STORY -->
   <section class="section">
     <div class="container">
@@ -96,8 +114,8 @@
       <div style="max-width:780px;margin:0 auto;" class="fade-in">
         <p style="font-size:1.1rem;line-height:1.85;color:var(--muted);margin-bottom:24px;">We started Position Xero after seeing the same story play out over and over: a business owner invests $1,500 a month in Google Ads, gets a pretty report full of impressions and clicks, and still has no leads to show for it. They switch agencies. Same result. They give up on digital marketing entirely.</p>
         <p style="font-size:1.1rem;line-height:1.85;color:var(--muted);margin-bottom:24px;">The problem isn't the platform. Google Ads and Meta Ads work. SEO works. Lead generation works. The problem is agencies that don't treat your money like their own, that hide behind vanity metrics and never get to the actual goal: qualified leads that turn into revenue.</p>
-        <p style="font-size:1.1rem;line-height:1.85;color:var(--muted);margin-bottom:24px;">Position Xero was built to be different. We measure one thing: cost per qualified lead. Everything else, impressions, clicks, reach, engagement, is secondary. We report on what actually matters to your business, and we don't stop optimising until the numbers make sense.</p>
-        <p style="font-size:1.1rem;line-height:1.85;color:var(--muted);">We're one of the few agencies in the US that offers LLM SEO as a core service, optimising your brand to be recommended by ChatGPT, Perplexity, and Gemini alongside traditional Google ranking. Because the future of search is already here, and most of your competitors haven't noticed yet.</p>
+        <p style="font-size:1.1rem;line-height:1.85;color:var(--muted);margin-bottom:24px;">Position Xero was built to be different. We measure one thing: cost per qualified lead. Everything else, impressions, clicks, reach, engagement, is secondary. We report on what actually matters to your business, and we don't stop optimizing until the numbers make sense.</p>
+        <p style="font-size:1.1rem;line-height:1.85;color:var(--muted);">We're one of the few agencies in the US that offers LLM SEO as a core service, optimizing your brand to be recommended by ChatGPT, Perplexity, and Gemini alongside traditional Google ranking. Because the future of search is already here, and most of your competitors haven't noticed yet.</p>
       </div>
     </div>
   </section>
@@ -128,7 +146,7 @@
         </div>
         <div class="value-card fade-in delay-1">
           <h3>Radical Transparency</h3>
-          <p>You see everything. Every dollar spent. Every campaign result. Every optimisation decision. No black-box dashboards, no vague reports.</p>
+          <p>You see everything. Every dollar spent. Every campaign result. Every optimization decision. No black-box dashboards, no vague reports.</p>
         </div>
         <div class="value-card fade-in delay-2">
           <h3>Always Ahead</h3>
@@ -144,7 +162,7 @@
         </div>
         <div class="value-card fade-in delay-2">
           <h3>Niche Expertise</h3>
-          <p>We don't serve everyone. We focus on four industries where we have deep expertise, and that specialisation translates directly into better results for our clients.</p>
+          <p>We don't serve everyone. We focus on four industries where we have deep expertise, and that specialization translates directly into better results for our clients.</p>
         </div>
       </div>
     </div>
@@ -162,7 +180,7 @@
           <div class="stars">★★★★★</div>
           <blockquote>"We went from 8 leads a month to 47 qualified leads in our first 90 days. Position Xero didn't just run our ads, they rebuilt our entire lead funnel."</blockquote>
           <div class="testimonial-author">
-            <img class="author-avatar" src="https://randomuser.me/api/portraits/men/52.jpg" alt="James M." />
+            <div class="author-avatar author-monogram" aria-hidden="true">JM</div>
             <div><div class="author-name">James M.</div><div class="author-role">Director, Property Investment Agency</div></div>
           </div>
         </div>
@@ -170,7 +188,7 @@
           <div class="stars">★★★★★</div>
           <blockquote>"Our Google Ads cost per lead dropped by 62% within 6 weeks. The transparency and reporting alone is worth more than what we paid other agencies."</blockquote>
           <div class="testimonial-author">
-            <img class="author-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah B." />
+            <div class="author-avatar author-monogram" aria-hidden="true">SB</div>
             <div><div class="author-name">Sarah B.</div><div class="author-role">Partner, Boutique Law Firm</div></div>
           </div>
         </div>
@@ -178,7 +196,7 @@
           <div class="stars">★★★★★</div>
           <blockquote>"They got us ranking on page 1 and started appearing in ChatGPT results within 3 months. I didn't even know that was possible before Position Xero."</blockquote>
           <div class="testimonial-author">
-            <img class="author-avatar" src="https://randomuser.me/api/portraits/men/65.jpg" alt="Thomas C." />
+            <div class="author-avatar author-monogram" aria-hidden="true">TC</div>
             <div><div class="author-name">Thomas C.</div><div class="author-role">CEO, Commercial Cleaning Company</div></div>
           </div>
         </div>
@@ -207,7 +225,7 @@
         <p>We Don't Just Run Ads.<br />We Build Revenue Machines.</p>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <p class="footer-heading">Services</p>
         <ul>
           <li><a href="ads.html">Google Ads</a></li>
           <li><a href="ads.html">Meta Ads</a></li>
@@ -217,7 +235,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <p class="footer-heading">Company</p>
         <ul>
           <li><a href="about.html">About</a></li>
           <li><a href="blog/">Blog</a></li>
@@ -226,17 +244,18 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Get In Touch</h4>
+        <p class="footer-heading">Get In Touch</p>
         <ul>
           <li><a href="mailto:hello@positionxero.com">hello@positionxero.com</a></li>
           <li><a href="tel:+17815078289">+1 (781) 507-8289</a></li>
+          <li>1558 Trail Ridge Rd, Alpine, WY 83128</li>
           <li><a href="https://wa.me/17815078289">WhatsApp Us</a></li>
           <li><a href="contact.html" class="btn-primary" style="margin-top:12px;font-size:13px;padding:10px 20px;">Book Free Audit →</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 Position Xero. All rights reserved.</span>
+      <span>© 2026 Position Xero. All rights reserved.</span>
       <span>America's Performance Marketing Agency</span>
     </div>
   </div>

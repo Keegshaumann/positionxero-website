@@ -1,5 +1,7 @@
 # Position Xero, Service Pricing
 
+> Last updated: 2026-06-11. All prices in USD (US Dollars), excluding applicable taxes.
+
 ## Lead Generation Campaigns
 - Starter: Custom, contact for quote
 - Includes: Funnel strategy, ad creative, campaign management
@@ -18,12 +20,12 @@
 ## SEO (Traditional + AI SEO)
 - Local SEO: From $600/month
 - Full SEO: From $1,000/month (on-page, technical, AI SEO, content)
-- Includes: Monthly ranking reports, content optimisation, schema markup
+- Includes: Monthly ranking reports, content optimization, schema markup
 
 ## Website / Landing Page Design
-- Landing page: From $750 once-off
-- Full website: From $1,800 once-off
-- Includes: SEO-optimised HTML, mobile responsive, fast load times
+- Landing page: From $750 one-time
+- Full website: From $1,800 one-time
+- Includes: SEO-optimized HTML, mobile responsive, fast load times
 
 ## Free Discovery Audit
 - Cost: $0, completely free

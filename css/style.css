@@ -3,7 +3,8 @@
    Design: Premium Agency Light — white primary, ink black, refined grey
    =================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
+/* Fonts are loaded via a non-blocking <link rel="preload"> in each page's <head>
+   (the render-blocking @import was removed for Core Web Vitals / LCP). */
 
 :root {
   /* Backgrounds */
@@ -896,6 +897,12 @@ body.dark-nav .nav:not(.scrolled) .gradient-text,
   border-color: var(--ink);
   box-shadow: 0 0 0 3px rgba(0,0,0,0.07);
 }
+.form-input:focus-visible,
+.form-textarea:focus-visible,
+.form-select:focus-visible {
+  outline: 3px solid #3D63FF;
+  outline-offset: 2px;
+}
 .form-textarea { min-height: 130px; resize: vertical; }
 .form-select option { background: #FFFFFF; color: var(--ink); }
 .form-input::placeholder,
@@ -1268,3 +1275,130 @@ body.dark-nav .nav:not(.scrolled) .gradient-text,
   .hero-metric-div { width: 100%; height: 1px; }
   .hero-metric { text-align: left; }
 }
+
+/* ===================================
+   SEO / Accessibility additions (2026-06-11)
+   =================================== */
+
+/* Visible keyboard focus indicator (keyboard-only via :focus-visible) */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible,
+.btn-primary:focus-visible,
+.btn-outline:focus-visible,
+.btn-white:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #3D63FF;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+/* On dark sections, use a light ring for contrast */
+.footer a:focus-visible,
+.cta-section a:focus-visible,
+.stats-section a:focus-visible,
+.page-header a:focus-visible,
+.article-header a:focus-visible,
+body.dark-nav .nav:not(.scrolled) a:focus-visible,
+.breadcrumb a:focus-visible {
+  outline-color: #FFFFFF;
+}
+
+/* Skip link — hidden until focused */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 3000;
+  background: #0D0D0D;
+  color: #F5F4F1;
+  padding: 12px 20px;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-radius: 0 0 10px 0;
+}
+.skip-link:focus {
+  left: 0;
+  outline: 3px solid #3D63FF;
+  outline-offset: 2px;
+}
+
+/* Larger hamburger tap target (>=44px) */
+.hamburger {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Breadcrumb trail — placed inside the dark page/article header */
+.breadcrumb { margin-bottom: 22px; }
+.breadcrumb ol {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  padding: 0;
+  margin: 0;
+}
+.breadcrumb li { display: flex; align-items: center; gap: 9px; color: rgba(245,244,241,0.55); }
+.breadcrumb li + li::before { content: "\203A"; color: rgba(245,244,241,0.35); }
+.breadcrumb a { color: rgba(245,244,241,0.62); text-decoration: none; }
+.breadcrumb a:hover { color: #F5F4F1; text-decoration: underline; }
+.breadcrumb [aria-current="page"] { color: #F5F4F1; font-weight: 600; }
+
+/* Monogram avatars (replace third-party stock-photo avatars) */
+.author-monogram {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1b1b1f 0%, #3c3c42 100%);
+  color: #F5F4F1;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  border: 2px solid var(--border);
+  text-transform: uppercase;
+}
+
+/* Footer headings de-promoted from <h4> to <p> (keeps visual styling) */
+.footer-heading {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  html { scroll-behavior: auto; }
+  #heroGrid { display: none !important; }
+  .orb { animation: none !important; }
+  .testimonials-track { transition: none !important; }
+}
+
+/* Mobile-menu CTA fix: `.mobile-menu a` forces dark text on every menu link,
+   which made the black "Book Free Audit" button render dark-on-black (invisible).
+   Restore the button's intended white text + keep it looking like a real button. */
+.mobile-menu a.btn-primary,
+.mobile-menu a.btn-primary:hover {
+  color: #FFFFFF;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 16px 34px;
+  margin-top: 10px;
+}
+.mobile-menu a.btn-primary:hover { background: #1A1A1A; }

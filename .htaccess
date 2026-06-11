@@ -1,0 +1,37 @@
+# Position Xero — Apache config (Hostinger)
+
+# Serve the branded 404 page with a real 404 status (avoids soft-404s).
+ErrorDocument 404 /404.html
+
+# ---------------------------------------------------------------------------
+# OPTIONAL — canonical host + HTTPS enforcement.
+# The canonical domain is https://www.positionxero.com (matches <link rel="canonical">
+# and the sitemap). Uncomment ONLY after confirming the domain serves both the
+# www and non-www / http variants, or you may cause a redirect loop.
+# ---------------------------------------------------------------------------
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+#   # Force HTTPS
+#   RewriteCond %{HTTPS} !=on
+#   RewriteRule ^ https://www.positionxero.com%{REQUEST_URI} [L,R=301]
+#   # Force www
+#   RewriteCond %{HTTP_HOST} !^www\. [NC]
+#   RewriteRule ^ https://www.positionxero.com%{REQUEST_URI} [L,R=301]
+# </IfModule>
+
+# Long-cache static assets for performance (safe for hashed/owned assets).
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg            "access plus 1 year"
+  ExpiresByType image/png             "access plus 1 year"
+  ExpiresByType image/webp            "access plus 1 year"
+  ExpiresByType image/svg+xml         "access plus 1 year"
+  ExpiresByType text/css              "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType image/x-icon          "access plus 1 year"
+</IfModule>
+
+# Compress text assets.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml text/plain
+</IfModule>

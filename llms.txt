@@ -2,13 +2,15 @@
 
 > Position Xero is an American performance marketing and lead generation agency based in Alpine, Wyoming. We help US service businesses generate consistent, qualified leads through Google Ads, Meta Ads, SEO, and conversion-focused website design.
 
+> Last updated: 2026-06-11
+
 ## What We Do
 
 - **Google Ads Management** — Search, Display, Shopping, YouTube campaigns. Minimum ad spend: $500/month. Retainer from $850/month.
 - **Meta Ads Management** — Facebook and Instagram advertising. Minimum ad spend: $300/month. Retainer from $750/month.
 - **Lead Generation** — Multi-channel campaigns (paid ads, cold email, SEO, landing pages) targeting 20-50 qualified leads/month.
 - **SEO Services** — Traditional on-page/technical SEO, AI SEO for Google AI Overviews, and LLM SEO for ChatGPT/Perplexity/Gemini citations. Local SEO from $600/month, full SEO from $1,000/month.
-- **Website and Landing Page Design** — High-converting, SEO-optimised HTML pages. Landing pages from $750, full sites from $1,800.
+- **Website and Landing Page Design** — High-converting, SEO-optimized HTML pages. Landing pages from $750, full sites from $1,800.
 
 ## Who We Serve
 
@@ -33,7 +35,7 @@
 - Direct access to the people running your campaigns — no account managers
 - Open-book reporting: CPL, ROAS, revenue — not impressions
 - 24-hour response guarantee
-- Free audit delivered as a personalised Loom video within 48 hours
+- Free audit delivered as a personalized Loom video within 48 hours
 
 ## Key Pages
 
@@ -54,6 +56,12 @@
 - What Is AI SEO? The Complete Guide for 2026: https://www.positionxero.com/blog/what-is-ai-seo.html
 - Google Ads vs Meta Ads: Which Platform in 2026?: https://www.positionxero.com/blog/google-ads-vs-meta-ads.html
 - Lead Generation for Small Businesses: 7 Strategies That Work: https://www.positionxero.com/blog/lead-generation-for-small-business.html
+- How Much Do Google Ads Cost in 2026?: https://www.positionxero.com/blog/how-much-do-google-ads-cost.html
+- Cost Per Lead Benchmarks by Industry: https://www.positionxero.com/blog/cost-per-lead-benchmarks.html
+- Lead Generation for Law Firms: https://www.positionxero.com/blog/law-firm-lead-generation.html
+- Local SEO for Service Businesses: https://www.positionxero.com/blog/local-seo-for-service-businesses.html
+- What Is a Landing Page? (And Why You Need One): https://www.positionxero.com/blog/what-is-a-landing-page.html
+- Real Estate Lead Generation That Works: https://www.positionxero.com/blog/real-estate-lead-generation.html
 
 ## Contact
 
