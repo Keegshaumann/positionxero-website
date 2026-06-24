@@ -109,7 +109,11 @@ img{ max-width: 100%; height: auto; display: block; }
 .section-header h2 { margin-bottom: 14px; }
 .section-header p  { font-size: 1.05rem; }
 
-/* ---- Fade in ---- */
+/* ---- Fade in ----
+   Elements start hidden and are revealed by main.js via the `.visible` class
+   (IntersectionObserver on scroll). main.js falls back to revealing every
+   .fade-in immediately if IntersectionObserver is unavailable, so content is
+   never permanently stuck hidden in supported or legacy browsers. */
 .fade-in {
   opacity: 0;
   transform: translateY(24px);
@@ -469,7 +473,14 @@ body.dark-nav .nav:not(.scrolled) .gradient-text,
   background-clip: text;
   line-height: 1; display: block; margin-bottom: 10px;
 }
-.stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.42); font-weight: 400; line-height: 1.5; }
+.stat-label { font-size: 0.85rem; color: rgba(245,244,241,0.7); font-weight: 400; line-height: 1.5; }
+
+/* Section header legible on the dark stats band (lead-gen "Results", etc.).
+   Light-background .section-header defaults above are intentionally untouched. */
+.stats-section .section-label        { color: rgba(245,244,241,0.6); }
+.stats-section .section-label::before { background: rgba(245,244,241,0.4); }
+.stats-section .section-header h2     { color: var(--white); }
+.stats-section .section-header p      { color: rgba(245,244,241,0.6); }
 
 /* ===================================
    PROCESS
@@ -857,6 +868,7 @@ body.dark-nav .nav:not(.scrolled) .gradient-text,
 }
 .article-header .container { position: relative; z-index: 1; max-width: 840px; }
 .article-header h1 { color: var(--white); margin-bottom: 16px; }
+.article-header > .container > p { color: rgba(245,244,241,0.6); }
 .article-meta { display: flex; align-items: center; gap: 18px; font-size: 0.84rem; color: rgba(245,244,241,0.5); flex-wrap: wrap; margin-bottom: 20px; font-family: var(--font-body); }
 .article-tag { background: rgba(255,255,255,0.1); color: rgba(245,244,241,0.7); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; font-family: var(--font-body); }
 
@@ -1385,6 +1397,8 @@ body.dark-nav .nav:not(.scrolled) a:focus-visible,
     scroll-behavior: auto !important;
   }
   html { scroll-behavior: auto; }
+  /* Reveal fade-in content immediately — no motion for reduced-motion users. */
+  .fade-in { opacity: 1 !important; transform: none !important; }
   #heroGrid { display: none !important; }
   .orb { animation: none !important; }
   .testimonials-track { transition: none !important; }

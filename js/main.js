@@ -138,11 +138,15 @@ if (hamburger && mobileMenu) {
 const nav = document.getElementById('nav');
 if (nav) window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
 
-// Fade-in on scroll
-const fadeObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); } });
-}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+// Fade-in on scroll (guarded so browsers without IntersectionObserver still show content)
+if ('IntersectionObserver' in window) {
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+} else {
+  document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+}
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(a => {
