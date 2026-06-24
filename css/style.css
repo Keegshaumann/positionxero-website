@@ -812,15 +812,8 @@ body.dark-nav .nav:not(.scrolled) .gradient-text,
   display: flex; align-items: center; justify-content: center;
   font-size: 3rem; position: relative; overflow: hidden;
 }
-.blog-thumb::after {
-  content: '';
-  position: absolute; inset: 0;
-  background:
-    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
-/* Blog thumb — real photo */
+/* Blog thumb - real photo (grid texture overlay removed: it was a leftover
+   from the old placeholder thumbnails and showed through real photos) */
 .blog-thumb img {
   width: 100%; height: 100%;
   object-fit: cover;
@@ -1416,3 +1409,25 @@ body.dark-nav .nav:not(.scrolled) a:focus-visible,
   margin-top: 10px;
 }
 .mobile-menu a.btn-primary:hover { background: #1A1A1A; }
+
+/* ===================================
+   GOOGLE-STYLE REVIEWS
+   =================================== */
+/* Amber Google star rating inside review cards */
+.stars { color: #FBBC04; margin: 0; font-size: 16px; letter-spacing: 1px; opacity: 1; }
+
+/* Card head: photo avatar + name/role + Google logo */
+.g-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.g-head-meta { flex: 1 1 auto; min-width: 0; }
+.g-head .author-name { margin-bottom: 1px; }
+.g-logo { flex-shrink: 0; display: block; }
+
+/* Rating row: stars + relative time */
+.g-rating { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.g-time { font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
+
+/* "Posted on Google" style summary in the section header */
+.g-summary { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.g-summary .rs-stars-lg { color: #FBBC04; }
+.g-summary .rs-score-lg { font-weight: 700; }
+.g-summary .g-logo-lg { flex-shrink: 0; display: block; }

@@ -115,20 +115,20 @@
           <p style="margin-bottom:32px;">Fill in your details and we'll reach out within 24 hours to schedule your free strategy call.</p>
 
           <!--
-            LEAD FORM — submissions are emailed to hello@positionxero.com via FormSubmit.co (no backend needed).
-            ⚠️ ONE-TIME SETUP: the FIRST submission triggers an activation email to hello@positionxero.com —
+            LEAD FORM: submissions are emailed to hello@positionxero.com via FormSubmit.co (no backend needed).
+            ⚠️ ONE-TIME SETUP: the FIRST submission triggers an activation email to hello@positionxero.com:
                click the link in it once, and every future lead then lands in the inbox automatically.
             🔒 To hide the address from bots: after activating, FormSubmit emails you a hashed alias; swap the
-               action URL to https://formsubmit.co/<your-hash>. (Switching providers — Web3Forms / Formspree —
+               action URL to https://formsubmit.co/<your-hash>. (Switching providers, Web3Forms / Formspree,
                works the same way: change the action URL and the provider-specific hidden fields.)
           -->
           <form id="contactForm" action="https://formsubmit.co/hello@positionxero.com" method="POST">
             <!-- FormSubmit configuration -->
-            <input type="hidden" name="_subject" value="New free-audit lead — positionxero.com" />
+            <input type="hidden" name="_subject" value="New free-audit lead from positionxero.com" />
             <input type="hidden" name="_template" value="table" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_next" value="https://www.positionxero.com/thank-you.html" />
-            <input type="hidden" name="_autoresponse" value="Thanks for requesting your free audit from Position Xero. We've received your details and a strategist will reach out within 24 hours to schedule your call. — The Position Xero Team" />
+            <input type="hidden" name="_autoresponse" value="Thanks for requesting your free audit from Position Xero. We've received your details and a strategist will reach out within 24 hours to schedule your call. The Position Xero Team" />
             <!-- honeypot: real users never see this; bots that fill it get silently dropped -->
             <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" />
 
@@ -176,9 +176,9 @@
               <select class="form-select" id="budget" name="budget">
                 <option value="" disabled selected>Select a range...</option>
                 <option>Under $850/month</option>
-                <option>$850 – $1,500/month</option>
-                <option>$1,500 – $2,500/month</option>
-                <option>$2,500 – $7,500/month</option>
+                <option>$850 - $1,500/month</option>
+                <option>$1,500 - $2,500/month</option>
+                <option>$2,500 - $7,500/month</option>
                 <option>Over $7,500/month</option>
               </select>
             </div>
