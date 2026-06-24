@@ -1,118 +1,110 @@
 /* Position Xero — main.js */
 
-// Hero cloth-warp grid effect
+// Cloth-warp grid effect — used on the hero AND every dark "grid" section.
 (function () {
-  const canvas = document.getElementById('heroGrid');
-  if (!canvas) return;
-
-  // Respect reduced-motion preferences — skip the animation entirely.
+  // Respect reduced-motion preferences — skip the animation entirely (static
+  // CSS grids stay in place as the fallback).
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const hero   = canvas.closest('.hero');
-  const ctx    = canvas.getContext('2d');
-  if (!hero) return;
-
-  // Grid geometry
-  const CELL   = 68;   // px between grid lines
-  const STEPS  = 16;   // polyline segments per line (more = smoother curve)
-
-  // Warp settings
+  // Geometry / physics (shared)
+  const STEPS    = 16;  // polyline segments per line (more = smoother curve)
   const SIGMA    = 200; // px — radius of cloth depression
   const STRENGTH = 90;  // px — max inward pull at dead-centre
+  const SPRING   = 0.055;
 
-  // Spring settings (gives the "weight sinking into fabric" lag)
-  const SPRING = 0.055;
+  // Attach a warping grid to `host`. opts: { canvas?, cell, color }
+  function initWarpGrid(host, opts) {
+    const CELL  = opts.cell  || 64;
+    const color = opts.color || 'rgba(0,0,0,0.055)';
 
-  let W = 0, H = 0;
-  let rawX = -9999, rawY = -9999; // actual mouse position
-  let smX  = -9999, smY  = -9999; // spring-eased position
-  let velX = 0, velY = 0;          // spring velocity
-
-  function resize() {
-    W = canvas.width  = hero.offsetWidth;
-    H = canvas.height = hero.offsetHeight;
-  }
-
-  // Track mouse relative to hero
-  hero.addEventListener('mousemove', e => {
-    const r = hero.getBoundingClientRect();
-    rawX = e.clientX - r.left;
-    rawY = e.clientY - r.top;
-  });
-  hero.addEventListener('mouseleave', () => { rawX = -9999; rawY = -9999; });
-
-  // Displacement at a single grid point
-  function warp(px, py) {
-    const dx = px - smX;
-    const dy = py - smY;
-    const d2 = dx * dx + dy * dy;
-    // Gaussian pull toward cursor — strongest at centre, zero at infinity
-    const pull = STRENGTH * Math.exp(-d2 / (2 * SIGMA * SIGMA));
-    const dist = Math.sqrt(d2) || 1;
-    return {
-      x: px - (dx / dist) * pull,
-      y: py - (dy / dist) * pull
-    };
-  }
-
-  // Draw one warped line by sampling STEPS points along it
-  function drawWarpedLine(x0, y0, x1, y1) {
-    ctx.beginPath();
-    for (let i = 0; i <= STEPS; i++) {
-      const t  = i / STEPS;
-      const px = x0 + (x1 - x0) * t;
-      const py = y0 + (y1 - y0) * t;
-      const w  = warp(px, py);
-      i === 0 ? ctx.moveTo(w.x, w.y) : ctx.lineTo(w.x, w.y);
+    // Use the supplied canvas (hero) or inject one behind the section content.
+    let canvas = opts.canvas;
+    if (!canvas) {
+      canvas = document.createElement('canvas');
+      canvas.className = 'warp-grid';
+      canvas.setAttribute('aria-hidden', 'true');
+      host.insertBefore(canvas, host.firstChild);
+      host.classList.add('has-warp-grid'); // hides the static CSS grid via CSS
     }
-    ctx.stroke();
-  }
+    const ctx = canvas.getContext('2d');
 
-  function draw() {
-    // Critically-damped spring toward raw mouse
-    const dx = rawX - smX;
-    const dy = rawY - smY;
-    velX += dx * SPRING;
-    velY += dy * SPRING;
-    velX *= 0.78; // damping
-    velY *= 0.78;
-    smX  += velX;
-    smY  += velY;
+    let W = 0, H = 0;
+    let rawX = -9999, rawY = -9999;  // actual mouse position (relative to host)
+    let smX  = -9999, smY  = -9999;  // spring-eased position
+    let velX = 0, velY = 0;
 
-    ctx.clearRect(0, 0, W, H);
-    ctx.strokeStyle = 'rgba(0,0,0,0.055)';
-    ctx.lineWidth   = 1;
+    function resize() { W = canvas.width = host.offsetWidth; H = canvas.height = host.offsetHeight; }
 
-    const cols = Math.ceil(W / CELL) + 1;
-    const rows = Math.ceil(H / CELL) + 1;
+    host.addEventListener('mousemove', e => {
+      const r = host.getBoundingClientRect();
+      rawX = e.clientX - r.left;
+      rawY = e.clientY - r.top;
+    });
+    host.addEventListener('mouseleave', () => { rawX = -9999; rawY = -9999; });
 
-    // Horizontal lines
-    for (let r = 0; r <= rows; r++) {
-      drawWarpedLine(0, r * CELL, W, r * CELL);
-    }
-    // Vertical lines
-    for (let c = 0; c <= cols; c++) {
-      drawWarpedLine(c * CELL, 0, c * CELL, H);
+    // Gaussian pull toward cursor — strongest at centre, zero at infinity.
+    function warp(px, py) {
+      const dx = px - smX, dy = py - smY, d2 = dx * dx + dy * dy;
+      const pull = STRENGTH * Math.exp(-d2 / (2 * SIGMA * SIGMA));
+      const dist = Math.sqrt(d2) || 1;
+      return { x: px - (dx / dist) * pull, y: py - (dy / dist) * pull };
     }
 
-    if (running) rafId = requestAnimationFrame(draw);
+    function drawWarpedLine(x0, y0, x1, y1) {
+      ctx.beginPath();
+      for (let i = 0; i <= STEPS; i++) {
+        const t = i / STEPS, px = x0 + (x1 - x0) * t, py = y0 + (y1 - y0) * t, w = warp(px, py);
+        i === 0 ? ctx.moveTo(w.x, w.y) : ctx.lineTo(w.x, w.y);
+      }
+      ctx.stroke();
+    }
+
+    function draw() {
+      // Critically-damped spring toward raw mouse (the "fabric sinking" lag).
+      const dx = rawX - smX, dy = rawY - smY;
+      velX += dx * SPRING; velY += dy * SPRING;
+      velX *= 0.78; velY *= 0.78;
+      smX += velX; smY += velY;
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1;
+
+      const cols = Math.ceil(W / CELL) + 1, rows = Math.ceil(H / CELL) + 1;
+      for (let r = 0; r <= rows; r++) drawWarpedLine(0, r * CELL, W, r * CELL);
+      for (let c = 0; c <= cols; c++) drawWarpedLine(c * CELL, 0, c * CELL, H);
+
+      if (running) rafId = requestAnimationFrame(draw);
+    }
+
+    let rafId = null, running = false;
+    function start() { if (!running) { running = true; rafId = requestAnimationFrame(draw); } }
+    function stop()  { running = false; if (rafId) cancelAnimationFrame(rafId); rafId = null; }
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Only animate while the section is on-screen (saves CPU/battery).
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(es => es.forEach(e => (e.isIntersecting ? start() : stop())), { threshold: 0 }).observe(host);
+    } else { start(); }
   }
 
-  let rafId = null, running = false;
-  function start() { if (!running) { running = true; rafId = requestAnimationFrame(draw); } }
-  function stop()  { running = false; if (rafId) cancelAnimationFrame(rafId); rafId = null; }
-
-  resize();
-  window.addEventListener('resize', resize);
-
-  // Only animate while the hero is on-screen (saves CPU/battery off-screen).
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver((entries) => {
-      entries.forEach(e => (e.isIntersecting ? start() : stop()));
-    }, { threshold: 0 }).observe(hero);
-  } else {
-    start();
+  // Homepage hero — existing canvas, light section so dark lines.
+  const heroCanvas = document.getElementById('heroGrid');
+  if (heroCanvas) {
+    const hero = heroCanvas.closest('.hero');
+    if (hero) initWarpGrid(hero, { canvas: heroCanvas, cell: 68, color: 'rgba(0,0,0,0.055)' });
   }
+
+  // Every dark "grid" section — inject a canvas, light lines, hide static grid.
+  [['.stats-section', 64], ['.cta-banner', 48], ['.page-header', 72], ['.article-header', 72]]
+    .forEach(([sel, cell]) => {
+      document.querySelectorAll(sel).forEach(host => {
+        if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
+        initWarpGrid(host, { cell, color: 'rgba(255,255,255,0.06)' });
+      });
+    });
 })();
 
 // Mobile nav
