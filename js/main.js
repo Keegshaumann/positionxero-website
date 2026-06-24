@@ -98,7 +98,7 @@
   }
 
   // Every dark "grid" section — inject a canvas, light lines, hide static grid.
-  [['.stats-section', 64], ['.cta-banner', 48], ['.page-header', 72], ['.article-header', 72]]
+  [['.stats-section', 64], ['.cta-banner', 48], ['.page-header', 72], ['.article-header', 72], ['.calc-section', 64]]
     .forEach(([sel, cell]) => {
       document.querySelectorAll(sel).forEach(host => {
         if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
@@ -223,3 +223,56 @@ if (testimonialsSection) {
   window.addEventListener('resize', () => { initTestimonials(); updateTestimonialsScroll(); });
   window.addEventListener('scroll', updateTestimonialsScroll, { passive: true });
 }
+
+// Cost-of-missed-leads calculator
+(function () {
+  const slider = document.getElementById('calcValue');
+  if (!slider) return;
+  const out     = document.getElementById('calcValueOut');
+  const yearEl  = document.getElementById('calcYear');
+  const monthEl = document.getElementById('calcMonth');
+
+  const LEADS = 30;            // assumed qualified leads / month
+  const CLOSE = 0.15;          // assumed close rate
+  const CPM   = LEADS * CLOSE; // new customers / month (4.5)
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const fmt = n => Math.round(n).toLocaleString('en-US');
+
+  let animId = null, shownYear = 0;
+  function animateYear(target) {
+    if (reduce) { shownYear = target; yearEl.textContent = fmt(target); return; }
+    cancelAnimationFrame(animId);
+    const start = shownYear, t0 = performance.now(), dur = 550;
+    function step(now) {
+      const p = Math.min(1, (now - t0) / dur);
+      const e = 1 - Math.pow(1 - p, 3);        // easeOutCubic
+      shownYear = start + (target - start) * e;
+      yearEl.textContent = fmt(shownYear);
+      if (p < 1) animId = requestAnimationFrame(step);
+    }
+    animId = requestAnimationFrame(step);
+  }
+
+  function update(animate) {
+    const value   = +slider.value;
+    const monthly = CPM * value;
+    const yearly  = monthly * 12;
+    out.textContent     = '$' + fmt(value);
+    monthEl.textContent = '$' + fmt(monthly);
+    if (animate) { animateYear(yearly); }
+    else { shownYear = yearly; yearEl.textContent = fmt(yearly); }
+  }
+
+  slider.addEventListener('input', () => update(true));
+  update(false); // set initial values without animating
+
+  // Count up from zero the first time the calculator scrolls into view.
+  const calc = slider.closest('.calc');
+  if (calc && 'IntersectionObserver' in window && !reduce) {
+    const obs = new IntersectionObserver((entries, o) => {
+      entries.forEach(e => { if (e.isIntersecting) { shownYear = 0; update(true); o.disconnect(); } });
+    }, { threshold: 0.35 });
+    obs.observe(calc);
+  }
+})();

@@ -202,7 +202,8 @@ body.dark-nav .nav:not(.scrolled) .gradient-text,
 .page-header .gradient-text,
 .article-header .gradient-text,
 .cta-banner .gradient-text,
-.stats-section .gradient-text {
+.stats-section .gradient-text,
+.calc-section .gradient-text {
   background: linear-gradient(135deg, #FFFFFF 0%, #888888 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1471,3 +1472,55 @@ body.dark-nav .nav:not(.scrolled) a:focus-visible,
 .article-content .blog-card h3 { margin-bottom: 8px; color: var(--ink); text-decoration: none; }
 .article-content .blog-card p { color: var(--muted); margin-bottom: 0; text-decoration: none; }
 .article-content .blog-card:hover h3 { color: #C8A84B; }
+
+/* ===================================
+   COST-OF-MISSED-LEADS CALCULATOR
+   Dark standout section (gets the interactive warp grid via main.js)
+   =================================== */
+.calc-section { background: var(--bg-dark); position: relative; overflow: hidden; }
+.calc-section .section-label { color: rgba(245,244,241,0.45); }
+.calc-section .section-header h2 { color: var(--white); }
+.calc-section .section-header p { color: rgba(245,244,241,0.6); }
+
+.calc { max-width: 620px; margin: 10px auto 0; text-align: center; }
+.calc-input { margin-bottom: 36px; }
+.calc-input-label { display: block; font-size: 0.95rem; color: rgba(245,244,241,0.7); margin-bottom: 14px; font-weight: 500; }
+.calc-value-readout {
+  font-family: var(--font-head); font-weight: 800; font-size: 2rem;
+  color: var(--white); margin-bottom: 20px; letter-spacing: -0.01em;
+}
+.calc-slider {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 6px; border-radius: 6px;
+  background: rgba(255,255,255,0.14); outline: none; cursor: pointer;
+}
+.calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: #C8A84B; border: 3px solid #F5F4F1; cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.45); transition: transform 0.15s ease;
+}
+.calc-slider::-webkit-slider-thumb:hover { transform: scale(1.12); }
+.calc-slider::-moz-range-thumb {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: #C8A84B; border: 3px solid #F5F4F1; cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.45);
+}
+.calc-slider::-moz-range-track { height: 6px; border-radius: 6px; background: rgba(255,255,255,0.14); }
+.calc-slider:focus-visible { box-shadow: 0 0 0 3px rgba(200,168,75,0.4); }
+.calc-scale { display: flex; justify-content: space-between; font-size: 0.72rem; color: rgba(245,244,241,0.4); margin-top: 11px; }
+
+.calc-result { padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); }
+.calc-headline {
+  font-family: var(--font-head); font-weight: 800;
+  font-size: clamp(2.6rem, 7vw, 4.2rem); color: var(--white);
+  line-height: 1.04; letter-spacing: -0.02em;
+}
+.calc-headline .calc-per { font-size: 1.05rem; font-weight: 600; color: rgba(245,244,241,0.5); margin-left: 8px; letter-spacing: 0; }
+.calc-result-label { font-size: 1rem; color: rgba(245,244,241,0.7); margin-top: 10px; }
+.calc-result-sub { font-size: 0.85rem; color: rgba(245,244,241,0.5); margin-top: 14px; }
+.calc-result-sub span { color: #C8A84B; font-weight: 600; }
+
+.calc-note { max-width: 600px; margin: 30px auto 0; text-align: center; font-size: 0.8rem; color: rgba(245,244,241,0.4); line-height: 1.6; }
+.calc-note strong { color: rgba(245,244,241,0.7); }
+.calc-cta { text-align: center; margin-top: 32px; }
