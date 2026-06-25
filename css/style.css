@@ -245,6 +245,16 @@ body.dark-nav .nav:not(.scrolled) .gradient-text,
 .nav-links a:hover { color: var(--ink); }
 .nav-cta { margin-left: 8px; }
 
+/* Header click-to-call */
+.nav-phone {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-left: 20px;
+  font-family: var(--font-body); font-size: 14px; font-weight: 600;
+  color: var(--ink); white-space: nowrap; transition: color var(--tr);
+}
+.nav-phone:hover { color: #C8A84B; }
+body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
+
 .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
 .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); border-radius: 2px; transition: all 0.3s ease; }
 .hamburger.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
@@ -965,6 +975,8 @@ body.dark-nav .nav:not(.scrolled) .gradient-text,
 @media (max-width: 768px) {
   .nav-links, .nav-cta { display: none; }
   .hamburger { display: flex; }
+  .nav-phone { margin-left: auto; margin-right: 10px; }
+  .nav-phone-num { display: none; }
 
   .problem-cards,
   .services-grid,
@@ -1223,7 +1235,7 @@ body.dark-nav .nav:not(.scrolled) .gradient-text,
    =================================== */
 .intake-steps {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   gap: 16px;
   margin-top: 36px;
@@ -1235,7 +1247,8 @@ body.dark-nav .nav:not(.scrolled) .gradient-text,
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 12px;
   padding: 18px 20px;
-  max-width: 220px;
+  flex: 1 1 220px;
+  max-width: 240px;
   text-align: left;
 }
 .is-num {
@@ -1252,7 +1265,7 @@ body.dark-nav .nav:not(.scrolled) .gradient-text,
 .is-text span   { font-size: 0.76rem; color: rgba(245,244,241,0.5); line-height: 1.5; }
 .intake-arrow {
   font-size: 1.2rem; color: rgba(255,255,255,0.25);
-  flex-shrink: 0; margin-top: 4px;
+  flex-shrink: 0; align-self: center;
 }
 
 /* ===================================
@@ -1270,7 +1283,7 @@ body.dark-nav .nav:not(.scrolled) .gradient-text,
   .results-grid { grid-template-columns: 1fr; }
   .benefits-grid { grid-template-columns: 1fr; }
   .intake-steps { flex-direction: column; align-items: stretch; }
-  .intake-step { max-width: 100%; }
+  .intake-step { flex: 1 1 auto; max-width: 100%; }
   .intake-arrow { display: none; }
 }
 
