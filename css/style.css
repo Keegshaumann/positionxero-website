@@ -1537,3 +1537,9 @@ body.dark-nav .nav:not(.scrolled) a:focus-visible,
 .calc-note { max-width: 600px; margin: 30px auto 0; text-align: center; font-size: 0.8rem; color: rgba(245,244,241,0.4); line-height: 1.6; }
 .calc-note strong { color: rgba(245,244,241,0.7); }
 .calc-cta { text-align: center; margin-top: 32px; }
+
+/* ---- Utility classes (replaces inline styles) ---- */
+.u-bg-soft  { background: var(--bg); }
+.u-bg-white { background: var(--bg-2); }
+.u-mt-40    { margin-top: 40px; }
+.u-cta-note { margin-top: 16px; font-size: 0.82rem; opacity: 0.45; }
