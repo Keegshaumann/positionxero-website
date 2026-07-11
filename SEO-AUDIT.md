@@ -85,7 +85,7 @@ Most fixes are low-risk, copy-paste HTML/CSS/JS edits that one implementer can s
 | 24 | High | seo.html and the AI-SEO blog post cannibalize "What is AI SEO" (duplicated definition + identical 5-step framework) | seo.html, blog/what-is-ai-seo.html | On-Page Content |
 | 25 | High | Service-page money H1s omit the primary keyword (title↔H1 mismatch) | index, services, lead-gen, blog/index.html | On-Page Content |
 | 26 | High | Every sitemap URL missing `<lastmod>` | sitemap.xml | Crawlability / AEO |
-| 27 | High | team.jpg (248KB JPEG) has no width/height, no fetchpriority, not WebP/AVIF, no srcset | index.html, img/team.jpg | Performance |
+| 27 | High | ~~team.jpg (248KB JPEG) has no width/height, no fetchpriority, not WebP/AVIF, no srcset~~ REVERSED 2026-07-11 (stock photo removed; no real team photo exists yet) | index.html, img/team.jpg | Performance |
 | 28 | High | All blog images hot-link unsplash.com with no preconnect (LCP on 3rd-party origin) | 10 blog files | Performance |
 | 29 | Medium | Titles over 60 chars (truncated) on 11 pages; descriptions over ~160 on 10 pages | see per-file plan | Head & Meta |
 | 30 | Medium | Blog OG/Twitter + BlogPosting images hot-link Unsplash (not owned, fragile) | 9 blog posts | Head & Meta / Structured Data |
@@ -116,7 +116,7 @@ Most fixes are low-risk, copy-paste HTML/CSS/JS edits that one implementer can s
 
 ### index.html
 1. **Remove the `aggregateRating` and the two `review` objects** from the ProfessionalService JSON-LD (the "James M." / "Sarah B." block). Do not self-host star ratings on the Organization entity. *(See user flag #1.)*
-2. **Rebuild the ProfessionalService block as the single canonical entity** with `"@id": "https://www.positionxero.com/#organization"`, and add: `logo` (ImageObject → `/img/logo.png` once created, or interim `/img/og-image.jpg`), `image`, `priceRange: "$$"`, `geo` (GeoCoordinates — verify real lat/long for 1558 Trail Ridge Rd), `openingHoursSpecification` (confirm real hours), `contactPoint` (sales, +17815078289, hello@positionxero.com), and change `areaServed` from the string `"US"` to `{"@type":"Country","name":"United States"}`. Keep `sameAs` only after verifying the profiles resolve.
+2. **Rebuild the ProfessionalService block as the single canonical entity** with `"@id": "https://www.positionxero.com/#organization"`, and add: `logo` (ImageObject → `/img/logo.png` once created, or interim `/img/og-image.jpg`), `image`, `priceRange: "$$"`, `geo` (GeoCoordinates — verify real lat/long for 1558 Trail Ridge Rd), `openingHoursSpecification` (confirm real hours), `contactPoint` (sales, +13075004020, hello@positionxero.com), and change `areaServed` from the string `"US"` to `{"@type":"Country","name":"United States"}`. Keep `sameAs` only after verifying the profiles resolve.
 3. **Rebuild the WebSite block** with `"@id":"https://www.positionxero.com/#website"` and `"publisher":{"@id":"https://www.positionxero.com/#organization"}`. Do not add a SearchAction (no working search).
 4. Add `<meta property="og:image:width" content="1200">`, `og:image:height` `630`, `og:image:alt`, `<meta name="twitter:image" content="https://www.positionxero.com/img/og-image.jpg">`, `<meta name="twitter:url" content="https://www.positionxero.com/">`.
 5. Add the shared head block (see "Shared head additions" below): robots meta, og:site_name, og:locale, theme-color, icon/manifest links.
@@ -130,8 +130,8 @@ Most fixes are low-risk, copy-paste HTML/CSS/JS edits that one implementer can s
 13. Add a **"Latest Insights"** section before the CTA linking the 3 newest posts with descriptive anchor text (real-estate, what-is-a-landing-page, local-seo) → completes the blog-to-homepage link.
 14. Add `aria-hidden="true"` to decorative ★★★★★ spans (the "4.9/5" text already conveys the rating).
 15. Avatars: add `width="46" height="46" loading="lazy" decoding="async"` (and ideally self-host / replace per user flag #4).
-16. team.jpg: wrap in `<picture>` with AVIF/WebP sources + `width="1537" height="900" decoding="async" loading="lazy"` (see new image assets).
-17. Add the full street address to the footer "Get In Touch" block: `<li><address style="font-style:normal">1558 Trail Ridge Rd, Alpine, WY 83128</address></li>` (byte-for-byte identical to the PostalAddress schema).
+16. ~~team.jpg: wrap in `<picture>` with AVIF/WebP sources + `width="1537" height="900" decoding="async" loading="lazy"` (see new image assets).~~ **REVERSED 2026-07-11 (stock photo removed; no real team photo exists yet)**
+17. ~~Add the full street address to the footer "Get In Touch" block~~ **REVERSED 2026-07-11:** the Alpine, WY address was removed site-wide (no legal connection to it; no registered entity yet). Do not re-add any street address or PostalAddress schema until a US LLC exists with an address the business is entitled to use.
 
 ### services.html
 1. Add the canonical-entity reference: change the inline publisher/provider Organization to `{"@id":"https://www.positionxero.com/#organization"}`. Add a `Service` JSON-LD block with `url` + `mainEntityOfPage`.
@@ -164,7 +164,7 @@ Most fixes are low-risk, copy-paste HTML/CSS/JS edits that one implementer can s
 
 ### lead-gen.html
 1. Service JSON-LD: provider → `{"@id":".../#organization"}`; `areaServed` → Country; `url`+`mainEntityOfPage`; add `Offer` only with a real price (else omit).
-2. Fold keyword into H1: `<h1>Lead Generation That Delivers<br><span class="gradient-text">Qualified Leads, On Demand</span></h1>`.
+2. Fold keyword into H1: `<h1>Lead Generation That Delivers<br><span class="gradient-text">Qualified Leads, On Demand</span></h1>`. **SUPERSEDED 2026-07-11:** H1 is now "Qualified Leads for US Service Businesses" — no on-demand promise.
 3. Add in-body links to its 4 supporting posts (lead-generation-for-small-business, law-firm-lead-generation, real-estate-lead-generation, cost-per-lead-benchmarks).
 4. Add visible breadcrumb matching schema.
 5. British→US spelling pass.
@@ -182,7 +182,7 @@ Most fixes are low-risk, copy-paste HTML/CSS/JS edits that one implementer can s
 8. Trim title (69 chars) to ≤60.
 
 ### about.html
-1. Add a **named team/Person section** (founder + lead strategist) with real names, roles, 2–3 sentence credentialed bios, photo (reuse img/team.jpg) and matching `Person` JSON-LD. *(See user flag #2.)*
+1. Add a **named team/Person section** (founder + lead strategist) with real names, roles, 2–3 sentence credentialed bios, ~~photo (reuse img/team.jpg)~~ **REVERSED 2026-07-11 (stock photo removed; no real team photo exists yet)** and matching `Person` JSON-LD. *(See user flag #2.)*
 2. British→US spelling pass (4).
 3. Avatars (3× randomuser.me): self-host or replace per user flag #4; meanwhile add `width/height/loading=lazy/decoding=async` and `aria-hidden="true"` on adjacent ★ spans.
 4. Shared head additions + font fix + `lang="en-US"` + skip link + `id="main"` + hamburger/nav ARIA + footer address.
@@ -314,7 +314,7 @@ Best-in-class: self-host WOFF2 + `@font-face{font-display:swap}` and drop the th
 | `/.htaccess` | `ErrorDocument 404 /404.html` so unmatched paths return the branded 404 with a real 404 status. |
 | `/img/logo.png` | Square (≥512×512) brand logo for `publisher.logo`/`#organization.logo`. **Design asset — must be produced.** |
 | `/img/blog/<slug>.jpg` ×9 | Self-hosted 1200×630 hero images replacing Unsplash hot-links (+ matching 800×420 thumbs). **Content/design deliverable.** |
-| `/img/team.avif`, `/img/team.webp` (+768w variants) | Modern responsive versions of team.jpg to cut ~130KB. |
+| ~~`/img/team.avif`, `/img/team.webp` (+768w variants)~~ | ~~Modern responsive versions of team.jpg to cut ~130KB.~~ REVERSED 2026-07-11 (stock photo removed; no real team photo exists yet) |
 | `/img/avatars/*.webp` (optional) | Self-hosted real client avatars if testimonials are kept (else replace with CSS monograms). |
 
 **Delete:** `/img/og-image.png` (175KB, referenced by nothing — only the .jpg is used).
@@ -328,7 +328,7 @@ Best-in-class: self-host WOFF2 + `@font-face{font-display:swap}` and drop the th
 3. **Statistic sources.** Several blog stats ("15% of queries (Google, 2026)", "10M Perplexity queries/day (Perplexity, 2026)", "7x more clicks", landing-page conversion rates) have no source URL and may be invented. Each needs a verified real source link or must be removed. **Do not guess URLs.**
 4. **Branded OG image + self-hosted blog images.** `img/og-image.jpg` now exists at 1200×630 — confirm it is genuinely branded (logo + value prop), not a placeholder. The 9 blog hero images still hot-link Unsplash and should be replaced with owned, license-clear files.
 5. **Verify social profiles before adding `twitter:site`/finalizing `sameAs`.** The LinkedIn/Instagram `sameAs` URLs appear only in JSON-LD with no on-page corroboration and may be guesses. Confirm each resolves to the real, owned profile; add a real X handle only if one exists. Add the confirmed profiles as visible footer links.
-6. **Business facts to confirm before publishing local schema:** exact geo-coordinates for 1558 Trail Ridge Rd (Alpine WY centroid is approximate), real business hours, and the real starting prices for any `Offer` on seo.html/web-design.html.
+6. **Business facts to confirm before publishing local schema:** ~~geo-coordinates for the Alpine address~~ (REVERSED 2026-07-11 — no local schema until a real registered address exists), real business hours, and the real starting prices for any `Offer` on seo.html/web-design.html.
 7. **CCBot stance** (allow vs. block training-only Common Crawl) — recommended allow given LLM-SEO goals, but make it an explicit, documented choice.
 
 ---

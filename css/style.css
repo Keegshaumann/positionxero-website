@@ -550,110 +550,6 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
 .niche-card h3 { font-size: 0.9rem; font-weight: 700; color: var(--ink); font-family: var(--font-head); }
 
 /* ===================================
-   TESTIMONIALS — horizontal scroll
-   =================================== */
-.testimonials-scroll-section {
-  position: relative;
-  background: var(--bg-2);
-  padding: 0;
-  /* overflow:hidden intentionally absent — it would break position:sticky on the child */
-}
-
-.testimonials-sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding-top: 80px; /* clear the fixed nav (~72px) */
-  box-sizing: border-box;
-}
-
-.testimonials-header {
-  flex-shrink: 0;
-  padding: 16px 0 32px;
-  text-align: center;
-}
-
-.testimonials-header h2 {
-  margin-bottom: 16px;
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-}
-
-.testimonials-track-wrapper {
-  flex: 1;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.testimonials-track {
-  display: flex;
-  gap: 24px;
-  padding: 0 60px;
-  will-change: transform;
-}
-
-.testimonial-card {
-  flex: 0 0 360px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 32px 26px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  display: flex;
-  flex-direction: column;
-  transition: box-shadow var(--tr), border-color var(--tr);
-}
-
-.testimonial-card:hover {
-  border-color: var(--border-h);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-}
-
-.testimonials-progress-wrap {
-  flex-shrink: 0;
-  height: 4px;
-  background: rgba(0,0,0,0.04);
-  margin-top: 20px;
-}
-
-.testimonials-progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--ink), #C8A84B);
-  width: 0%;
-  transition: width 0.1s ease-out;
-}
-
-.testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
-
-.testimonial-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 32px 26px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  display: flex; flex-direction: column;
-}
-.stars { color: var(--ink); margin-bottom: 16px; font-size: 11px; letter-spacing: 3px; opacity: 0.7; }
-.testimonial-card blockquote {
-  font-style: normal; font-size: 0.9rem;
-  color: var(--muted); line-height: 1.8; margin-bottom: 24px; flex: 1;
-}
-.testimonial-author { display: flex; align-items: center; gap: 12px; }
-.author-avatar {
-  width: 46px; height: 46px; border-radius: 50%;
-  object-fit: cover;
-  flex-shrink: 0;
-  display: block;
-  background: var(--border);
-  border: 2px solid var(--border);
-}
-.author-name { font-weight: 700; font-size: 0.85rem; color: var(--ink); font-family: var(--font-head); margin-bottom: 2px; }
-.author-role { font-size: 0.76rem; color: var(--muted); }
-
-/* ===================================
    CTA BANNER — dark for contrast
    =================================== */
 .cta-section { padding: 80px 0; }
@@ -981,7 +877,6 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
   .problem-cards,
   .services-grid,
   .process-grid,
-  .testimonials-grid,
   .blog-grid,
   .values-grid { grid-template-columns: 1fr; }
 
@@ -994,12 +889,6 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
   .hero h1      { font-size: 2.6rem; }
 }
 
-@media (max-width: 768px) {
-  .testimonials-header { padding: 40px 0 30px; }
-  .testimonials-track { gap: 16px; padding: 0 30px; }
-  .testimonial-card { flex: 0 0 300px; padding: 24px 20px; }
-}
-
 @media (max-width: 540px) {
   .footer-grid    { grid-template-columns: 1fr; }
   .hero-ctas      { flex-direction: column; }
@@ -1007,9 +896,6 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
   .stats-grid     { grid-template-columns: 1fr 1fr; gap: 28px; }
   .niches-grid    { grid-template-columns: 1fr 1fr; }
   .footer-bottom  { flex-direction: column; gap: 8px; text-align: center; }
-  .testimonials-header { padding: 30px 0 20px; }
-  .testimonials-track { gap: 12px; padding: 0 20px; }
-  .testimonial-card { flex: 0 0 280px; padding: 20px 16px; font-size: 0.85rem; }
 }
 
 /* ===================================
@@ -1122,11 +1008,6 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
   gap: 32px;
   flex-wrap: wrap;
 }
-.rs-rating { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-.rs-stars { color: #C8A84B; font-size: 14px; letter-spacing: 2px; }
-.rs-score { font-family: var(--font-head); font-weight: 700; font-size: 0.95rem; color: var(--white); }
-.rs-count { font-size: 0.8rem; color: rgba(245,244,241,0.5); }
-.rs-divider { width: 1px; height: 22px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
 .rs-badges { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
 .rs-badge {
   font-size: 0.78rem; font-weight: 500;
@@ -1220,17 +1101,6 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
 }
 
 /* ===================================
-   RATING SUMMARY — testimonials header
-   =================================== */
-.rating-summary {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  margin-top: 12px; flex-wrap: wrap;
-}
-.rs-stars-lg { color: #C8A84B; font-size: 1.1rem; letter-spacing: 3px; }
-.rs-score-lg { font-family: var(--font-head); font-weight: 800; font-size: 1rem; color: var(--ink); }
-.rs-count-sm { font-size: 0.82rem; color: var(--muted); }
-
-/* ===================================
    INTAKE STEPS — CTA process
    =================================== */
 .intake-steps {
@@ -1279,7 +1149,6 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
   .hero-metrics { gap: 0; padding: 16px 20px; }
   .hm-num { font-size: 1.2rem; }
   .rating-strip-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .rs-divider { display: none; }
   .results-grid { grid-template-columns: 1fr; }
   .benefits-grid { grid-template-columns: 1fr; }
   .intake-steps { flex-direction: column; align-items: stretch; }
@@ -1406,7 +1275,6 @@ body.dark-nav .nav:not(.scrolled) a:focus-visible,
   .fade-in { opacity: 1 !important; transform: none !important; }
   #heroGrid { display: none !important; }
   .orb { animation: none !important; }
-  .testimonials-track { transition: none !important; }
 }
 
 /* Mobile-menu CTA fix: `.mobile-menu a` forces dark text on every menu link,
@@ -1421,29 +1289,6 @@ body.dark-nav .nav:not(.scrolled) a:focus-visible,
   margin-top: 10px;
 }
 .mobile-menu a.btn-primary:hover { background: #1A1A1A; }
-
-/* ===================================
-   GOOGLE-STYLE REVIEWS
-   =================================== */
-/* Amber Google star rating inside review cards */
-.stars { color: #FBBC04; margin: 0; font-size: 16px; letter-spacing: 1px; opacity: 1; }
-
-/* Card head: photo avatar + name/role + Google logo */
-.g-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-.g-head-meta { flex: 1 1 auto; min-width: 0; }
-.g-head .author-name { margin-bottom: 1px; }
-.g-logo { flex-shrink: 0; display: block; }
-
-/* Rating row: stars + relative time */
-.g-rating { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
-.g-time { font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
-.stars .star-empty { color: #dadce0; } /* unfilled star on 4-star reviews */
-
-/* "Posted on Google" style summary in the section header */
-.g-summary { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.g-summary .rs-stars-lg { color: #FBBC04; }
-.g-summary .rs-score-lg { font-weight: 700; }
-.g-summary .g-logo-lg { flex-shrink: 0; display: block; }
 
 /* ===================================
    INTERACTIVE WARP GRID

@@ -192,38 +192,6 @@ const counterObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.6 });
 document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
 
-// Testimonials horizontal scroll
-// Uses offsetTop (static) not getBoundingClientRect (shifts as you scroll).
-// Section height is set to 100vh + maxTranslate so the sticky inner content
-// "pauses" the page while the cards travel left.
-const testimonialsSection = document.getElementById('testimonialsSection');
-if (testimonialsSection) {
-  const track       = document.getElementById('testimonialsTrack');
-  const progressBar = document.getElementById('testimonialsProgress');
-  const wrapper     = track.parentElement;
-  let maxTranslate  = 0;
-
-  function initTestimonials() {
-    maxTranslate = Math.max(0, track.scrollWidth - wrapper.offsetWidth);
-    testimonialsSection.style.height = (window.innerHeight + maxTranslate) + 'px';
-  }
-
-  function updateTestimonialsScroll() {
-    if (maxTranslate <= 0) return;
-    const progress = Math.max(0, Math.min(1,
-      (window.scrollY - testimonialsSection.offsetTop) / maxTranslate
-    ));
-    track.style.transform = `translateX(${-(progress * maxTranslate)}px)`;
-    if (progressBar) progressBar.style.width = (progress * 100) + '%';
-  }
-
-  // Run immediately (DOM ready via defer), then again after fonts/images load
-  initTestimonials();
-  window.addEventListener('load', () => { initTestimonials(); updateTestimonialsScroll(); });
-  window.addEventListener('resize', () => { initTestimonials(); updateTestimonialsScroll(); });
-  window.addEventListener('scroll', updateTestimonialsScroll, { passive: true });
-}
-
 // Cost-of-missed-leads calculator
 (function () {
   const slider = document.getElementById('calcValue');

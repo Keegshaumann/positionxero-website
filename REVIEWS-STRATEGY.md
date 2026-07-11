@@ -1,5 +1,7 @@
 # Position Xero — Reviews & Reputation Strategy (GBP + Third-Party)
 
+> **⚠️ REALITY UPDATE 2026-07-11:** GBP is **ON HOLD indefinitely** — the business has no place of operations customers can visit and no one travels to customers from the listed area, so it is not eligible under Google's guidelines, and no verification workaround should be attempted (suspension risk + it's deception). There is also **no registered legal entity yet** and **zero clients**, so no platform reviews can exist yet either. Sequence is therefore: first client(s) → register US LLC (Doola) → Clutch/Trustpilot reviews from real clients. Skip Part 1 until there is a genuinely eligible location; start at Part 2/3 once real clients exist.
+
 > **Why this doc exists:** Reviews on *your own site* (self-serving `Review`/`AggregateRating` schema) are **ignored by Google for rich results and can trigger a manual action** — which is why we removed them. The reviews that move rankings and get you cited by AI live **off-site**, on platforms Google and LLMs trust. This is the plan to build that, legitimately.
 >
 > **The AI angle (your selling point):** AI assistants cite *third-party* sources ~6.5× more often than a brand's own domain. When someone asks ChatGPT/Perplexity "best lead-gen agency for law firms" or "is Position Xero legit," the answer is assembled from Google reviews, Clutch, and directory listings — not from positionxero.com. Owning those is owning the AI answer.
@@ -26,13 +28,13 @@ GBP is the highest-leverage asset. It powers the Map Pack, the knowledge panel, 
 - **Categories:**
   - Primary: **Marketing agency**
   - Secondary: **Advertising agency**, **Internet marketing service**, **Website designer**, **Marketing consultant**
-- **Service-area vs. storefront:** You're at 1558 Trail Ridge Rd, Alpine, WY but serve the US. Set up as a **Service-Area Business (SAB)** — hide the street address and define service areas (start: Wyoming + your top target metros; you can list up to 20). This avoids "we don't see customers at this address" verification problems.
-- **NAP must match the site exactly:** `Position Xero` · `+1 (781) 507-8289` · `1558 Trail Ridge Rd, Alpine, WY 83128` · `hello@positionxero.com`. Inconsistent NAP across the web is the #1 local-SEO killer.
+- **Eligibility (this is what put GBP on hold):** GBP requires a location customers visit OR that you travel to customers from your base. A remote agency with no real presence at the listed address does not qualify — and Google's video verification is designed to catch exactly that. Revisit only if the business ever has a genuine place of operations.
+- **NAP must match the site exactly:** `Position Xero` · `+1 (307) 500-4020` · `hello@positionxero.com` — **no street address** (the site no longer shows one, deliberately). Inconsistent NAP across the web is the #1 local-SEO killer.
 - **Services:** add each with a description + price/"from" where comfortable (mirror `pricing.md`): Google Ads Management, Meta Ads Management, Lead Generation, SEO, AI SEO / LLM SEO, Website & Landing Page Design.
 - **Website link:** `https://www.positionxero.com` · **Appointment link:** `https://www.positionxero.com/contact.html`
 - **Photos:** logo (use `/img/logo.png`), cover, 5+ team/work photos, and screenshots of result dashboards (blur client names). Profiles with photos get materially more clicks.
 - **Description (750 chars):** lead with what you do + who for + proof, in plain language AI can extract. Draft:
-  > Position Xero is a US performance-marketing agency helping service businesses — law firms, real estate, recruitment, home services — generate consistent, qualified leads through Google Ads, Meta Ads, SEO, AI SEO, and high-converting websites. Month-to-month, no lock-in, open-book reporting on cost-per-lead and revenue (not vanity metrics). Average 300% lead increase and 62% lower cost-per-lead within 90 days. Free 30-minute audit delivered as a personalized video.
+  > Position Xero is a founder-led performance-marketing agency helping US service businesses — law firms, real estate, recruitment, home services — generate consistent, qualified leads through Google Ads, Meta Ads, SEO, AI SEO, and high-converting websites. Month-to-month, no lock-in, open-book reporting on cost-per-lead and revenue (not vanity metrics). You work directly with the two co-founders. Free 30-minute audit delivered as a personalized video.
 - **Google Posts:** publish weekly (offers, case studies, blog links). Signals an active business.
 - **Q&A:** seed 3–5 real FAQs yourself (allowed) — "Do you require long contracts?", "What's your minimum ad spend?" — answer factually.
 
