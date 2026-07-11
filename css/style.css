@@ -1388,3 +1388,89 @@ body.dark-nav .nav:not(.scrolled) a:focus-visible,
 .u-bg-white { background: var(--bg-2); }
 .u-mt-40    { margin-top: 40px; }
 .u-cta-note { margin-top: 16px; font-size: 0.82rem; opacity: 0.45; }
+
+
+/* ============ FOUNDERS / PROOF SECTION ============ */
+.founders-grid {
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) 1fr;
+  gap: 56px;
+  align-items: start;
+  max-width: 1020px;
+  margin: 0 auto;
+}
+.founders-photo { margin: 0; }
+.founders-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.14);
+}
+.founders-photo figcaption {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.4;
+}
+.audit-card {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--ink);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin: 22px 0;
+}
+.audit-card p { margin: 0; font-size: 0.95rem; line-height: 1.65; }
+.audit-card a { color: var(--ink); text-decoration: underline; }
+@media (max-width: 820px) {
+  .founders-grid { grid-template-columns: 1fr; gap: 32px; }
+  .founders-photo { max-width: 320px; margin: 0 auto; }
+}
+
+/* Founder avatars (about page) */
+.founder-avatar {
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 18px;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+}
+
+/* Bullet list inside a card (how-we-work reporting) */
+.report-list {
+  list-style: disc;
+  padding-left: 20px;
+  margin-top: 10px;
+  display: grid;
+  gap: 6px;
+  font-size: 0.87rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* ============ BUTTON COLOR GUARD ============
+   Scoped anchor-color rules (.article-content a, .footer-col a, etc.) outrank
+   .btn-primary's white text, producing invisible black-on-black buttons.
+   Buttons keep their own colors inside any link-styled container. */
+.article-content a.btn-primary,
+.contact-card a.btn-primary,
+.legal-content a.btn-primary,
+.audit-card a.btn-primary {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+/* On the dark footer, primary buttons invert (same convention as dark nav + cta-banner) */
+.footer-col a.btn-primary { background: var(--white); color: var(--ink); text-decoration: none; }
+.footer-col a.btn-primary:hover { background: #F0EFED; color: var(--ink); }
+.article-content a.btn-outline,
+.legal-content a.btn-outline,
+.audit-card a.btn-outline {
+  text-decoration: none;
+}
+.mobile-menu a.btn-primary:hover { color: #FFFFFF; }

@@ -185,23 +185,63 @@
   </div>
 </div>
 
-<!-- TEAM SECTION -->
-<section class="section team-section">
+<!-- FOUNDERS / PROOF SECTION -->
+<section class="section team-section" id="founders">
   <div class="container">
-    <div class="team-grid" style="grid-template-columns:1fr;max-width:780px;margin:0 auto;">
+    <div class="founders-grid">
 
-      <!-- Story -->
-      <div class="team-story fade-in delay-2">
-        <span class="section-label">The People Behind Your Results</span>
-        <h2>Built by Marketers Who Got Tired of Bad Agencies</h2>
-        <p>Position Xero was founded by Ronnie Botes and Keegan Haumann — two marketers who believe small service businesses deserve the same disciplined, numbers-first advertising that big companies get, without the agency bloat. When you work with us, you work with the founders directly: the people who build your campaigns are the people who answer your calls.</p>
-        <p>When a campaign underperforms, we say so, and we fix it. That's the only way we know how to work.</p>
+      <figure class="founders-photo fade-in">
+        <img src="img/founders.jpg" alt="Ronnie James Botes and Keegan Shane Haumann, co-founders of Position Xero" width="768" height="1376" loading="lazy" decoding="async" />
+        <figcaption>Ronnie James Botes &amp; Keegan Shane Haumann — Co-Founders</figcaption>
+      </figure>
+
+      <div class="team-story fade-in delay-1">
+        <span class="section-label">Who You're Working With</span>
+        <h2>Two Real People. One Open Book.</h2>
+        <p>Position Xero is run by the two of us. Before this, we worked inside an international company whose entire business was what we do now — lead generation, web development, and SEO. Keegan on the full-stack development side; Ronnie across web builds, Google and Meta paid ads, and SEO. NDAs keep that portfolio behind closed doors — so we built an agency where you see everything instead: every dollar, every lead, every report.</p>
+        <p>The AI edge comes from our second company, <a href="https://www.cognexa.co.za/" target="_blank" rel="noopener">Cognexa</a>, where we build AI business solutions — it's why optimizing for AI search (ChatGPT, Perplexity, Google AI Overviews) is standard here, not an add-on.</p>
+        <div class="audit-card">
+          <p><strong>Don't take our word for it — audit us.</strong> Run positionxero.com through any SEO auditor (try <a href="https://www.seoptimer.com" target="_blank" rel="noopener nofollow">SEOptimer</a>) right now. You'll find the on-page work in top shape — and, honestly, a weak backlink grade. This domain is young, and link authority is the one thing in SEO you can't buy or rush; it compounds with age, content, and real citations. We publish that anyway, because an agency that hides its weak spots would be the real red flag. Watch it climb.</p>
+        </div>
+        <p>Every step is written down before you sign: <a href="how-we-work.html">here's your first 90 days</a>.</p>
         <div class="team-cta">
           <a href="about.html" class="btn-outline">Our Full Story →</a>
           <a href="contact.html" class="btn-primary">Work With Us →</a>
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- COST OF MISSED LEADS CALCULATOR -->
+<section class="section calc-section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label">Free Tool</span>
+      <h2>How Much Revenue Are<br /><span class="gradient-text">Missed Leads Costing You?</span></h2>
+      <p>A managed lead-gen program brings in qualified leads every month. Drag the slider to see what those leads are worth at your numbers.</p>
+    </div>
+
+    <div class="calc fade-in">
+      <div class="calc-input">
+        <label class="calc-input-label" for="calcValue">What's a new customer worth to you?</label>
+        <div class="calc-value-readout" id="calcValueOut">$2,500</div>
+        <input type="range" id="calcValue" class="calc-slider" min="250" max="20000" step="250" value="2500" aria-label="Average customer value in dollars" />
+        <div class="calc-scale"><span>$250</span><span>$20,000+</span></div>
+      </div>
+
+      <div class="calc-result" aria-live="polite">
+        <div class="calc-headline">$<span id="calcYear">135,000</span><span class="calc-per">/year</span></div>
+        <div class="calc-result-label">in new revenue you could be capturing</div>
+        <div class="calc-result-sub"><span id="calcMonth">$11,250</span>/mo &middot; ~4-5 new customers/mo</div>
+      </div>
+    </div>
+
+    <p class="calc-note fade-in">Based on <strong>~30 qualified leads a month</strong> at a <strong>15% close rate</strong>, the upper end of the typical industry range for managed lead-gen programs. Your own numbers will vary.</p>
+
+    <div class="calc-cta fade-in">
+      <a href="contact.html" class="btn-primary">Capture this revenue →</a>
     </div>
   </div>
 </section>
@@ -272,38 +312,6 @@
         <p>High-converting, fast-loading pages built to turn visitors into leads, not just impress your competitors.</p>
         <span class="service-link">Explore Web Design →</span>
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- COST OF MISSED LEADS CALCULATOR -->
-<section class="section calc-section">
-  <div class="container">
-    <div class="section-header fade-in">
-      <span class="section-label">Free Tool</span>
-      <h2>How Much Revenue Are<br /><span class="gradient-text">Missed Leads Costing You?</span></h2>
-      <p>A managed lead-gen program brings in qualified leads every month. Drag the slider to see what those leads are worth at your numbers.</p>
-    </div>
-
-    <div class="calc fade-in">
-      <div class="calc-input">
-        <label class="calc-input-label" for="calcValue">What's a new customer worth to you?</label>
-        <div class="calc-value-readout" id="calcValueOut">$2,500</div>
-        <input type="range" id="calcValue" class="calc-slider" min="250" max="20000" step="250" value="2500" aria-label="Average customer value in dollars" />
-        <div class="calc-scale"><span>$250</span><span>$20,000+</span></div>
-      </div>
-
-      <div class="calc-result" aria-live="polite">
-        <div class="calc-headline">$<span id="calcYear">135,000</span><span class="calc-per">/year</span></div>
-        <div class="calc-result-label">in new revenue you could be capturing</div>
-        <div class="calc-result-sub"><span id="calcMonth">$11,250</span>/mo &middot; ~4-5 new customers/mo</div>
-      </div>
-    </div>
-
-    <p class="calc-note fade-in">Based on <strong>~30 qualified leads a month</strong> at a <strong>15% close rate</strong>, the upper end of the typical industry range for managed lead-gen programs. Your own numbers will vary.</p>
-
-    <div class="calc-cta fade-in">
-      <a href="contact.html" class="btn-primary">Capture this revenue →</a>
     </div>
   </div>
 </section>
@@ -493,6 +501,7 @@
         <ul>
           <li><a href="about.html">About</a></li>
           <li><a href="blog/">Blog</a></li>
+          <li><a href="how-we-work.html">How We Work</a></li>
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
