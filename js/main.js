@@ -244,3 +244,14 @@ document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el))
     obs.observe(calc);
   }
 })();
+
+// Email links are assembled client-side to keep the address out of the static HTML (spam-scraper hygiene).
+(function () {
+  var links = document.querySelectorAll('[data-em-u]');
+  for (var i = 0; i < links.length; i++) {
+    var a = links[i];
+    var addr = a.getAttribute('data-em-u') + '@' + a.getAttribute('data-em-d');
+    a.setAttribute('href', 'mailto:' + addr);
+    a.textContent = addr;
+  }
+})();

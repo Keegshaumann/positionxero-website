@@ -12,20 +12,20 @@ ErrorDocument 404 /404.html
 </IfModule>
 
 # ---------------------------------------------------------------------------
-# OPTIONAL — canonical host + HTTPS enforcement.
-# The canonical domain is https://www.positionxero.com (matches <link rel="canonical">
-# and the sitemap). Uncomment ONLY after confirming the domain serves both the
-# www and non-www / http variants, or you may cause a redirect loop.
+# Canonical host + HTTPS in a SINGLE hop (matches <link rel="canonical"> and the
+# sitemap). Enabled 2026-07-12 to fix the multi-redirect chain PageSpeed flagged
+# (0.63s). Loop-proofed: the X-Forwarded-Proto guard covers proxy TLS termination.
 # ---------------------------------------------------------------------------
-# <IfModule mod_rewrite.c>
-#   RewriteEngine On
-#   # Force HTTPS
-#   RewriteCond %{HTTPS} !=on
-#   RewriteRule ^ https://www.positionxero.com%{REQUEST_URI} [L,R=301]
-#   # Force www
-#   RewriteCond %{HTTP_HOST} !^www\. [NC]
-#   RewriteRule ^ https://www.positionxero.com%{REQUEST_URI} [L,R=301]
-# </IfModule>
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Any non-canonical host (bare domain, casing variants) -> canonical, one hop
+  RewriteCond %{HTTP_HOST} !^www\.positionxero\.com$ [NC]
+  RewriteRule ^ https://www.positionxero.com%{REQUEST_URI} [L,R=301]
+  # Canonical host over plain HTTP -> HTTPS, one hop
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+  RewriteRule ^ https://www.positionxero.com%{REQUEST_URI} [L,R=301]
+</IfModule>
 
 # Long-cache static assets for performance (safe for hashed/owned assets).
 <IfModule mod_expires.c>
