@@ -3,6 +3,20 @@
 # Serve the branded 404 page with a real 404 status (avoids soft-404s).
 ErrorDocument 404 /404.html
 
+# ---------------------------------------------------------------------------
+# NEVER serve internal/source files. pricing.md is the ONE public .md
+# (machine-readable pricing, linked from llms.txt). Everything else that is
+# markdown, and the whole /docs/ tree, returns 404.
+# ---------------------------------------------------------------------------
+RedirectMatch 404 ^/docs(/|$)
+RedirectMatch 404 ^/(?!pricing\.md$)[^/]*\.md$
+<FilesMatch "\.md$">
+  Require all denied
+</FilesMatch>
+<Files "pricing.md">
+  Require all granted
+</Files>
+
 # Redirect direct /index.html (and /blog/index.html) hits to the clean canonical URL.
 # THE_REQUEST condition prevents loops when Apache serves "/" via DirectoryIndex internally.
 <IfModule mod_rewrite.c>
