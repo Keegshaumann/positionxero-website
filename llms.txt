@@ -2,7 +2,7 @@
 
 > Position Xero is a founder-led performance marketing and lead generation agency serving US service businesses. Clients work directly with the two co-founders — no account managers — to generate consistent, qualified leads through Google Ads, Meta Ads, SEO, and conversion-focused website design.
 
-> Last updated: 2026-07-11
+> Last updated: 2026-07-12
 
 ## What We Do
 
@@ -32,6 +32,7 @@
 - Home: https://www.positionxero.com/
 - Services Overview: https://www.positionxero.com/services
 - SEO Services (AI SEO, LLM SEO, Traditional): https://www.positionxero.com/seo
+- Free SEO Report Card (instant on-page audit tool): https://www.positionxero.com/seo-audit
 - Google Ads & Meta Ads: https://www.positionxero.com/ads
 - Lead Generation: https://www.positionxero.com/lead-gen
 - Web Design: https://www.positionxero.com/web-design
