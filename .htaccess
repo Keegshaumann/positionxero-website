@@ -22,7 +22,7 @@ RedirectMatch 404 ^/(?!pricing\.md$)[^/]*\.md$
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
-  RewriteRule ^(.*/)?index\.html$ /$1 [R=301,L]
+  RewriteRule ^(.*/)?index\.html$ https://www.positionxero.com/$1 [R=301,L]
 </IfModule>
 
 # ---------------------------------------------------------------------------
@@ -32,10 +32,11 @@ RedirectMatch 404 ^/(?!pricing\.md$)[^/]*\.md$
 # ---------------------------------------------------------------------------
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  # Legacy .html URL requested directly -> 301 to the clean URL
+  # Legacy .html URL requested directly -> 301 to the clean canonical URL.
+  # Absolute target: even a URL wrong on host AND scheme AND extension resolves in ONE hop.
   RewriteCond %{REQUEST_URI} !(^|/)(index|404)\.html$ [NC]
   RewriteCond %{THE_REQUEST} \s/+([^\s?]+)\.html[\s?] [NC]
-  RewriteRule ^ /%1 [R=301,L]
+  RewriteRule ^ https://www.positionxero.com/%1 [R=301,L]
   # Clean URL requested -> serve the matching .html file internally
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
