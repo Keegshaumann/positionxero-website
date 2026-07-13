@@ -49,6 +49,10 @@ Google Search Console tracks our BreadcrumbList rich results (currently 0 invali
 
 Copy an existing recent post (e.g. `blog/how-much-do-solar-leads-cost.html`) as the starting point for any new post — it has the correct head/schema/breadcrumb structure.
 
+## seo-tool/ — internal source folder, never served
+
+`seo-tool/` holds the Free Audit funnel's supporting source (Cloudflare worker, README, client-delivery toolkit playbooks), consolidated from the old `positionxero-seo-tool` repo (deleted 2026-07-12). The live tool page is `free-audit.html` at the repo root (`/free-audit` — a question-by-question lead funnel that flows into the SEO report card; the earlier `seo-audit.html` was replaced before ever deploying and `/seo-audit` 301s to `/free-audit`). `.htaccess` returns 404 for everything under `/seo-tool/`. Never link to files in it from any page, sitemap.xml, or llms.txt. NOTE: this GitHub repo is public — anything truly confidential still belongs in `Desktop\Position Xero\02 Internal - DO NOT SEND\`, not here.
+
 ## Other conventions
 
 - All canonical URLs use `https://www.positionxero.com` (https + www).
