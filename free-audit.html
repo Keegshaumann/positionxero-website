@@ -92,9 +92,29 @@ a{color:inherit}
   background:var(--bg-dark);color:var(--white-on-dark);
   min-height:100vh;min-height:100svh;
   display:flex;flex-direction:column;
+  position:relative;overflow:hidden;
 }
 .shell.done{min-height:0;padding-bottom:18px}
 .shell > .wrap{width:100%}
+
+/* ---------- Interactive warp grid ----------
+   Canvas injected below so the grid reacts to the cursor (same cloth-warp as
+   the site hero). The static ::before grid is the no-JS / reduced-motion
+   fallback and is hidden once the canvas is live. */
+.shell::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size:68px 68px;
+}
+.shell.has-warp-grid::before{display:none}
+.warp-grid{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  display:block;pointer-events:none;z-index:0;
+}
+.shell > *:not(.warp-grid){position:relative;z-index:1}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:24px 0}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
 .logo-mark{
@@ -1987,6 +2007,99 @@ $('editUrlBtn').addEventListener('click', () => {
   }
   setProgress(0);
   flushOutbox();
+})();
+</script>
+
+<script>
+/* ============================================================
+   Cloth-warp grid — same effect as the site hero / dark sections
+   (js/main.js). Inlined here because this page is standalone.
+   ============================================================ */
+(function () {
+  // Reduced motion: skip entirely, the static CSS grid stays as the fallback.
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const host = document.getElementById('shell');
+  if (!host) return;
+
+  // Geometry / physics — identical to the hero.
+  const STEPS    = 16;  // polyline segments per line (more = smoother curve)
+  const SIGMA    = 200; // px — radius of cloth depression
+  const STRENGTH = 90;  // px — max inward pull at dead-centre
+  const SPRING   = 0.055;
+  const CELL     = 68;
+  const COLOR    = 'rgba(255,255,255,0.06)';
+
+  const canvas = document.createElement('canvas');
+  canvas.className = 'warp-grid';
+  canvas.setAttribute('aria-hidden', 'true');
+  host.insertBefore(canvas, host.firstChild);
+  host.classList.add('has-warp-grid'); // hides the static CSS grid
+  const ctx = canvas.getContext('2d');
+
+  let W = 0, H = 0;
+  let rawX = -9999, rawY = -9999;  // actual mouse position (relative to host)
+  let smX  = -9999, smY  = -9999;  // spring-eased position
+  let velX = 0, velY = 0;
+
+  function resize() { W = canvas.width = host.offsetWidth; H = canvas.height = host.offsetHeight; }
+
+  host.addEventListener('mousemove', e => {
+    const r = host.getBoundingClientRect();
+    rawX = e.clientX - r.left;
+    rawY = e.clientY - r.top;
+  });
+  host.addEventListener('mouseleave', () => { rawX = -9999; rawY = -9999; });
+
+  // Gaussian pull toward cursor — strongest at centre, zero at infinity.
+  function warp(px, py) {
+    const dx = px - smX, dy = py - smY, d2 = dx * dx + dy * dy;
+    const pull = STRENGTH * Math.exp(-d2 / (2 * SIGMA * SIGMA));
+    const dist = Math.sqrt(d2) || 1;
+    return { x: px - (dx / dist) * pull, y: py - (dy / dist) * pull };
+  }
+
+  function drawWarpedLine(x0, y0, x1, y1) {
+    ctx.beginPath();
+    for (let i = 0; i <= STEPS; i++) {
+      const t = i / STEPS, px = x0 + (x1 - x0) * t, py = y0 + (y1 - y0) * t, w = warp(px, py);
+      i === 0 ? ctx.moveTo(w.x, w.y) : ctx.lineTo(w.x, w.y);
+    }
+    ctx.stroke();
+  }
+
+  function draw() {
+    // Critically-damped spring toward raw mouse (the "fabric sinking" lag).
+    const dx = rawX - smX, dy = rawY - smY;
+    velX += dx * SPRING; velY += dy * SPRING;
+    velX *= 0.78; velY *= 0.78;
+    smX += velX; smY += velY;
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = COLOR;
+    ctx.lineWidth = 1;
+
+    const cols = Math.ceil(W / CELL) + 1, rows = Math.ceil(H / CELL) + 1;
+    for (let r = 0; r <= rows; r++) drawWarpedLine(0, r * CELL, W, r * CELL);
+    for (let c = 0; c <= cols; c++) drawWarpedLine(c * CELL, 0, c * CELL, H);
+
+    if (running) rafId = requestAnimationFrame(draw);
+  }
+
+  let rafId = null, running = false;
+  function start() { if (!running) { running = true; rafId = requestAnimationFrame(draw); } }
+  function stop()  { running = false; if (rafId) cancelAnimationFrame(rafId); rafId = null; }
+
+  resize();
+  window.addEventListener('resize', resize);
+  // The shell changes height as screens swap and when it collapses after
+  // submit, so track its own box too — not just the window.
+  if ('ResizeObserver' in window) new ResizeObserver(resize).observe(host);
+
+  // Only animate while the shell is on-screen (saves CPU/battery).
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(es => es.forEach(e => (e.isIntersecting ? start() : stop())), { threshold: 0 }).observe(host);
+  } else { start(); }
 })();
 </script>
 </body>
