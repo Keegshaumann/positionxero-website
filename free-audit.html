@@ -206,7 +206,7 @@ fieldset.screen{border:none}
 .lead-micro a{color:rgba(245,244,241,0.8)}
 .lead-micro a:hover{color:var(--white-on-dark)}
 
-/* ---------- Radio option cards ---------- */
+/* ---------- Option cards (radio + checkbox) ---------- */
 .opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:640px}
 .opt-input{position:absolute;opacity:0;pointer-events:none}
 .opt-card{
@@ -223,6 +223,10 @@ fieldset.screen{border:none}
 .opt-input:checked + .opt-card{border-color:var(--gold);background:rgba(200,168,75,0.12);color:var(--white-on-dark)}
 .opt-input:checked + .opt-card .opt-dot{background:var(--gold);border-color:var(--gold)}
 .opt-input:focus-visible + .opt-card{outline:2px solid var(--blue);outline-offset:2px}
+/* q-service allows multiple picks — its dots render as ticked checkboxes */
+#q-service .opt-dot{border-radius:5px;display:flex;align-items:center;justify-content:center}
+#q-service .opt-dot::after{content:'\2713';font-size:12px;font-weight:700;line-height:1;color:transparent;transition:color var(--tr)}
+#q-service .opt-input:checked + .opt-card .opt-dot::after{color:#161616}
 
 /* ---------- Intro + final screens ---------- */
 .intro-screen h1{font-size:clamp(2.3rem,6.5vw,4rem);font-weight:800;letter-spacing:-0.03em;margin:22px 0 16px}
@@ -513,15 +517,16 @@ fieldset.screen{border:none}
       </div>
 
       <fieldset class="screen" id="q-service" hidden>
-        <legend class="q-label"><span class="q-num" aria-hidden="true">6 &rarr;</span>Which service are you interested in?</legend>
+        <legend class="q-label"><span class="q-num" aria-hidden="true">6 &rarr;</span>Which services are you interested in?</legend>
+        <p class="q-sub">Select all that apply.</p>
         <div class="opt-grid">
-          <input class="opt-input" type="radio" id="service-seo" name="service" value="seo" aria-describedby="serviceError">
+          <input class="opt-input" type="checkbox" id="service-seo" name="service" value="seo" aria-describedby="serviceError">
           <label class="opt-card" for="service-seo"><span class="opt-dot" aria-hidden="true"></span>SEO &amp; AI SEO</label>
-          <input class="opt-input" type="radio" id="service-ads" name="service" value="ads" aria-describedby="serviceError">
+          <input class="opt-input" type="checkbox" id="service-ads" name="service" value="ads" aria-describedby="serviceError">
           <label class="opt-card" for="service-ads"><span class="opt-dot" aria-hidden="true"></span>Google Ads &amp; Meta Ads</label>
-          <input class="opt-input" type="radio" id="service-web" name="service" value="web" aria-describedby="serviceError">
+          <input class="opt-input" type="checkbox" id="service-web" name="service" value="web" aria-describedby="serviceError">
           <label class="opt-card" for="service-web"><span class="opt-dot" aria-hidden="true"></span>Web Design</label>
-          <input class="opt-input" type="radio" id="service-leads" name="service" value="leads" aria-describedby="serviceError">
+          <input class="opt-input" type="checkbox" id="service-leads" name="service" value="leads" aria-describedby="serviceError">
           <label class="opt-card" for="service-leads"><span class="opt-dot" aria-hidden="true"></span>Lead Generation</label>
         </div>
         <p class="field-error" id="serviceError" aria-live="polite"></p>
@@ -1390,9 +1395,10 @@ const BLOG_SERVICE_RULES = {
 };
 const BLOG_FALLBACK_SLUGS = ['is-buying-leads-worth-it', 'is-lead-generation-worth-the-investment'];
 
-/* Pure: industry (free text) -> service (enum) -> fallbacks, deduped, capped at 3.
-   topIssues is accepted for signature symmetry with the lead payload but doesn't
-   currently drive matching — industry/service are the reliable signals we have. */
+/* Pure: industry (free text) -> services (comma-joined enums, e.g. 'seo, web')
+   -> fallbacks, deduped, capped at 3. topIssues is accepted for signature
+   symmetry with the lead payload but doesn't currently drive matching —
+   industry/services are the reliable signals we have. */
 function pickRelatedPosts(industry, service, topIssues) {
   const ind = (industry || '').toLowerCase();
   const slugs = [];
@@ -1400,7 +1406,11 @@ function pickRelatedPosts(industry, service, topIssues) {
   for (const rule of BLOG_INDUSTRY_RULES) {
     if (rule.keywords.some((kw) => ind.indexOf(kw) !== -1)) rule.slugs.forEach(pushSlug);
   }
-  if (slugs.length < 3 && BLOG_SERVICE_RULES[service]) BLOG_SERVICE_RULES[service].forEach(pushSlug);
+  for (const svc of (service || '').split(',')) {
+    if (slugs.length >= 3) break;
+    const rules = BLOG_SERVICE_RULES[svc.trim()];
+    if (rules) rules.forEach(pushSlug);
+  }
   if (slugs.length < 3) BLOG_FALLBACK_SLUGS.forEach(pushSlug);
   return slugs.slice(0, 3).map((slug) => ({ href: '/blog/' + slug, title: BLOG_POST_TITLES[slug] }));
 }
@@ -1640,11 +1650,11 @@ function validPhone(raw) {
 /* ---------------- Question funnel engine ---------------- */
 const SCREENS = ['s-intro','q-name','q-email','q-phone','q-biz','q-industry','q-service','q-adspend','q-site'];
 const SITE_SCREEN_INDEX = 8;
-const answers = { name:'', business:'', email:'', phone:'', industry:'', service:'', adSpend:'' };
+const answers = { name:'', business:'', email:'', phone:'', industry:'', services:[], adSpend:'' };
 let cur = 0;
 let funnelDone = false;
 
-function totalQ() { return answers.service === 'seo' ? 8 : 7; }
+function totalQ() { return answers.services.indexOf('seo') !== -1 ? 8 : 7; }
 
 function setProgress(idx) {
   const fill = $('progressFill'), txt = $('progressText');
@@ -1656,9 +1666,10 @@ function setProgress(idx) {
 }
 
 function focusScreen(s) {
-  const inp = s.querySelector('input:not([type="radio"])');
+  const inp = s.querySelector('input:not([type="radio"]):not([type="checkbox"])');
   if (inp) { inp.focus(); return; }
-  const checked = s.querySelector('input[type="radio"]:checked') || s.querySelector('input[type="radio"]');
+  const checked = s.querySelector('input[type="radio"]:checked, input[type="checkbox"]:checked')
+    || s.querySelector('input[type="radio"], input[type="checkbox"]');
   if (checked) { checked.focus(); return; }
   const btn = s.querySelector('button');
   if (btn) btn.focus();
@@ -1723,7 +1734,7 @@ function reopenFunnelAtSite() {
 function captureLead(hasWebsite, website, keyword) {
   currentLead = {
     name: answers.name, business: answers.business, email: answers.email, phone: answers.phone,
-    industry: answers.industry, service: answers.service, adSpend: answers.adSpend,
+    industry: answers.industry, service: answers.services.join(', '), adSpend: answers.adSpend,
     hasWebsite: hasWebsite, website: website, keyword: keyword || ''
   };
   storeLead(currentLead);
@@ -1740,7 +1751,11 @@ const SERVICE_LINKS = {
 function completeNonSeo() {
   captureLead(false, null, '');
   if (!suppressLead) sendLead(buildLeadPayload('captured'));
-  const link = SERVICE_LINKS[answers.service] || { href: '/contact', label: 'Get in touch' };
+  // Multi-select: link out to the first picked service that has a page.
+  let link = { href: '/contact', label: 'Get in touch' };
+  for (const svc of answers.services) {
+    if (SERVICE_LINKS[svc]) { link = SERVICE_LINKS[svc]; break; }
+  }
   const a = $('thanksServiceLink');
   a.href = link.href;
   a.textContent = link.label;
@@ -1805,10 +1820,10 @@ function advance() {
       break;
     }
     case 'q-service': {
-      const r = document.querySelector('input[name="service"]:checked');
-      if (!r) { setChoiceError('service', 'serviceError', 'Please choose a service.'); focusScreen($('q-service')); return; }
+      const picked = document.querySelectorAll('input[name="service"]:checked');
+      if (!picked.length) { setChoiceError('service', 'serviceError', 'Please choose at least one service.'); focusScreen($('q-service')); return; }
       setChoiceError('service', 'serviceError', null);
-      answers.service = r.value;
+      answers.services = Array.from(picked, (c) => c.value);
       showScreen(7);
       break;
     }
@@ -1817,7 +1832,7 @@ function advance() {
       if (!r) { setChoiceError('adspend', 'adspendError', 'Please choose an option.'); focusScreen($('q-adspend')); return; }
       setChoiceError('adspend', 'adspendError', null);
       answers.adSpend = r.value;
-      if (answers.service === 'seo') { showScreen(8); } else { completeNonSeo(); }
+      if (answers.services.indexOf('seo') !== -1) { showScreen(8); } else { completeNonSeo(); }
       break;
     }
     case 'q-site': {
@@ -1995,8 +2010,11 @@ $('editUrlBtn').addEventListener('click', () => {
     $('phoneInput').value = stored.phone || '';
     if (stored.industry) $('industryInput').value = stored.industry;
     if (stored.service) {
-      const r = $('service-' + stored.service);
-      if (r) r.checked = true;
+      // 'seo, web' since multi-select; a bare 'seo' from older stored leads still works.
+      for (const svc of String(stored.service).split(',')) {
+        const c = $('service-' + svc.trim());
+        if (c) c.checked = true;
+      }
     }
     if (stored.adSpend) {
       const r = $('adspend-' + stored.adSpend);

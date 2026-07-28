@@ -305,6 +305,19 @@ function cleanString(s) {
   return s.replace(/[\x00-\x1f\x7f]/g, ' ').trim();
 }
 
+/**
+ * The service question is a multi-select: the page sends a comma-joined
+ * string ('seo, web'). Keep known values only, preserving pick order.
+ */
+function sanitizeServices(raw) {
+  if (typeof raw !== 'string') return '';
+  return raw
+    .split(',')
+    .map((s) => s.trim())
+    .filter((s) => LEAD_SERVICES.includes(s))
+    .join(', ');
+}
+
 /** Keep only strings from arr, cleaned/truncated, up to maxItems. */
 function sanitizeStringArray(arr, maxItems, maxLen) {
   if (!Array.isArray(arr)) return [];
@@ -337,7 +350,7 @@ function validateLead(data) {
     email: cleanString(data.email),
     phone: cleanString(data.phone),
     industry: typeof data.industry === 'string' ? cleanString(data.industry).slice(0, 120) : '',
-    service: typeof data.service === 'string' && LEAD_SERVICES.includes(data.service) ? data.service : '',
+    service: sanitizeServices(data.service),
     adSpend: typeof data.adSpend === 'string' && LEAD_AD_SPEND_BRACKETS.includes(data.adSpend) ? data.adSpend : '',
     hasWebsite: typeof data.hasWebsite === 'boolean' ? data.hasWebsite : null,
     website: typeof data.website === 'string' && data.website.trim() ? cleanString(data.website).slice(0, 2000) : null,
@@ -368,7 +381,7 @@ async function sendLeadEmail(lead, env) {
     `Email: ${lead.email}`,
     `Phone: ${lead.phone}`,
     `Industry: ${lead.industry || '(none)'}`,
-    `Service interested in: ${lead.service || '(none)'}`,
+    `Services interested in: ${lead.service || '(none)'}`,
     `Monthly ad spend: ${lead.adSpend || '(none)'}`,
     `Has website: ${lead.hasWebsite === null ? 'unknown' : lead.hasWebsite}`,
     `Website: ${lead.website || '(none)'}`,
