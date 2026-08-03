@@ -1,8 +1,8 @@
 # Position Xero
 
-> Position Xero is a founder-led performance marketing and lead generation agency serving US service businesses. Clients work directly with the two co-founders — no account managers — to generate consistent, qualified leads through Google Ads, Meta Ads, SEO, and conversion-focused website design.
+> Position Xero is a founder-led performance marketing and lead generation agency serving service businesses in the United States and South Africa. The agency is run from South Africa and delivers all work remotely. Clients work directly with the two co-founders — no account managers — to generate consistent, qualified leads through Google Ads, Meta Ads, SEO, and conversion-focused website design.
 
-> Last updated: 2026-07-12
+> Last updated: 2026-08-04
 
 ## What We Do
 
@@ -41,6 +41,22 @@
 - FAQ: https://www.positionxero.com/faq
 - Blog: https://www.positionxero.com/blog/
 - Pricing (machine-readable): https://www.positionxero.com/pricing.md
+
+## South Africa Market Pages
+
+Position Xero is based in South Africa and serves the South African market directly, with ZAR quoting and POPIA-compliant lead capture.
+
+- Lead Generation South Africa: https://www.positionxero.com/lead-generation-south-africa
+- SEO South Africa: https://www.positionxero.com/seo-south-africa
+- Google Ads Management South Africa: https://www.positionxero.com/google-ads-south-africa
+- Meta / Facebook Ads South Africa (incl. click-to-WhatsApp): https://www.positionxero.com/meta-ads-south-africa
+- Web Design South Africa: https://www.positionxero.com/web-design-south-africa
+
+## US Market & Industry Pages
+
+- Lead Generation for Dallas-Fort Worth: https://www.positionxero.com/lead-generation-dallas
+- HVAC Marketing: https://www.positionxero.com/hvac-marketing
+- Roofing Marketing: https://www.positionxero.com/roofing-marketing
 
 ## Blog Articles
 

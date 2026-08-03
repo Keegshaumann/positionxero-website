@@ -586,8 +586,8 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
 }
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr 1fr;
-  gap: 48px;
+  grid-template-columns: 1.5fr 1fr 1.15fr 1fr 1fr;
+  gap: 40px;
   margin-bottom: 56px;
 }
 .footer-brand-logo {
@@ -636,6 +636,10 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
 .page-header .section-label { color: rgba(245,244,241,0.45); }
 .page-header .section-label::before { background: rgba(245,244,241,0.3); }
 .page-header > .container > p { font-size: 1.12rem; max-width: 580px; color: rgba(245,244,241,0.6); }
+.page-header > .container > p.page-header-tagline {
+  font-size: 1.2rem; font-weight: 600; color: rgba(245,244,241,0.9);
+  margin-bottom: 10px;
+}
 
 /* ===================================
    FAQ

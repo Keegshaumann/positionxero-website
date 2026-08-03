@@ -1,6 +1,10 @@
 # Position Xero, Service Pricing
 
-> Last updated: 2026-06-11. All prices in USD (US Dollars), excluding applicable taxes.
+> Last updated: 2026-08-04. All prices in USD (US Dollars), excluding applicable taxes.
+> Position Xero serves service businesses in the United States and South Africa. USD is the
+> source-of-truth currency for every figure below. South African clients are quoted the
+> equivalent in ZAR at the prevailing exchange rate at the time of quoting; ask for a
+> current ZAR quote rather than converting these figures yourself.
 
 ## Lead Generation Campaigns
 - Starter: Custom, contact for quote
@@ -30,6 +34,8 @@
 ## Free Discovery Audit
 - Cost: $0, completely free
 - Includes: Loom video audit of your current ads, website, and SEO
-- Book at: https://www.positionxero.com/contact.html
+- Book at: https://www.positionxero.com/contact
 
-Note: Prices quoted in USD (US Dollars). Custom packages available.
+Note: Prices quoted in USD (US Dollars); ZAR quotes available for South African clients at the
+prevailing rate. Ad spend is always billed separately from the management fee. Month-to-month,
+no lock-in contracts. Custom packages available.
