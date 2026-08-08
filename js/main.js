@@ -200,9 +200,13 @@ document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el))
   const yearEl  = document.getElementById('calcYear');
   const monthEl = document.getElementById('calcMonth');
 
-  const LEADS = 30;            // assumed qualified leads / month
-  const CLOSE = 0.15;          // assumed close rate
-  const CPM   = LEADS * CLOSE; // new customers / month (4.5)
+  // Leads/month and close rate are user inputs, not assumptions we assert.
+  const leadsEl = document.getElementById('calcLeads');
+  const closeEl = document.getElementById('calcClose');
+  const leadsOut = document.getElementById('calcLeadsOut');
+  const closeOut = document.getElementById('calcCloseOut');
+  const custEl   = document.getElementById('calcCustomers');
+  if (!leadsEl || !closeEl || !leadsOut || !closeOut || !custEl) return;
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const fmt = n => Math.round(n).toLocaleString('en-US');
@@ -224,15 +228,21 @@ document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el))
 
   function update(animate) {
     const value   = +slider.value;
-    const monthly = CPM * value;
+    const leads   = +leadsEl.value;
+    const close   = +closeEl.value / 100;
+    const cpm     = leads * close;          // new customers / month
+    const monthly = cpm * value;
     const yearly  = monthly * 12;
-    out.textContent     = '$' + fmt(value);
-    monthEl.textContent = '$' + fmt(monthly);
+    out.textContent      = '$' + fmt(value);
+    leadsOut.textContent = fmt(leads);
+    closeOut.textContent = closeEl.value + '%';
+    custEl.textContent   = (Math.round(cpm * 10) / 10).toLocaleString('en-US');
+    monthEl.textContent  = '$' + fmt(monthly);
     if (animate) { animateYear(yearly); }
     else { shownYear = yearly; yearEl.textContent = fmt(yearly); }
   }
 
-  slider.addEventListener('input', () => update(true));
+  [slider, leadsEl, closeEl].forEach(el => el.addEventListener('input', () => update(true)));
   update(false); // set initial values without animating
 
   // Count up from zero the first time the calculator scrolls into view.
@@ -254,4 +264,36 @@ document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el))
     a.setAttribute('href', 'mailto:' + addr);
     a.textContent = addr;
   }
+})();
+
+// Lead value calculator (/blog/how-much-are-leads-worth). Self-contained; no-ops elsewhere.
+(function () {
+  const val = document.getElementById('lvValue');
+  if (!val) return;
+  const close  = document.getElementById('lvClose');
+  const margin = document.getElementById('lvMargin');
+  const valOut = document.getElementById('lvValueOut');
+  const closeOut = document.getElementById('lvCloseOut');
+  const marginOut = document.getElementById('lvMarginOut');
+  const profitEl = document.getElementById('lvProfit');
+  const revEl = document.getElementById('lvRevenue');
+  const cplEl = document.getElementById('lvMaxCpl');
+  if (!close || !margin || !valOut || !closeOut || !marginOut || !profitEl || !revEl || !cplEl) return;
+
+  const ACQUISITION_SHARE = 0.30; // documented in the copy above the calculator
+  const fmt = n => Math.round(n).toLocaleString('en-US');
+
+  function update() {
+    const v = +val.value, c = +close.value / 100, m = +margin.value / 100;
+    const revenuePerLead = v * c;
+    const profitPerLead  = v * m * c;
+    valOut.textContent    = '$' + fmt(v);
+    closeOut.textContent  = close.value + '%';
+    marginOut.textContent = margin.value + '%';
+    profitEl.textContent  = fmt(profitPerLead);
+    revEl.textContent     = '$' + fmt(revenuePerLead);
+    cplEl.textContent     = '$' + fmt(profitPerLead * ACQUISITION_SHARE);
+  }
+  [val, close, margin].forEach(el => el.addEventListener('input', update));
+  update();
 })();

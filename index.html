@@ -42,7 +42,7 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": "Organization",
     "@id": "https://www.positionxero.com/#organization",
     "name": "Position Xero",
     "alternateName": "Position Xero Marketing",
@@ -56,7 +56,6 @@
     },
     "image": "https://www.positionxero.com/img/og-image.jpg",
     "telephone": "+13075004020",
-    "priceRange": "$$",
     "areaServed": [
       { "@type": "Country", "name": "United States" },
       { "@type": "Country", "name": "South Africa" }
@@ -220,7 +219,7 @@
     <div class="section-header fade-in">
       <span class="section-label">Free Tool</span>
       <h2>How Much Revenue Are<br /><span class="gradient-text">Missed Leads Costing You?</span></h2>
-      <p>A managed lead-gen program brings in qualified leads every month. Drag the slider to see what those leads are worth at your numbers.</p>
+      <p>Set your own three numbers to see what a month of qualified leads would be worth to your business.</p>
     </div>
 
     <div class="calc fade-in">
@@ -231,17 +230,31 @@
         <div class="calc-scale"><span>$250</span><span>$20,000+</span></div>
       </div>
 
+      <div class="calc-input">
+        <label class="calc-input-label" for="calcLeads">How many qualified leads a month?</label>
+        <div class="calc-value-readout" id="calcLeadsOut">30</div>
+        <input type="range" id="calcLeads" class="calc-slider" min="5" max="100" step="5" value="30" aria-label="Qualified leads per month" />
+        <div class="calc-scale"><span>5</span><span>100</span></div>
+      </div>
+
+      <div class="calc-input">
+        <label class="calc-input-label" for="calcClose">What share of those do you close?</label>
+        <div class="calc-value-readout" id="calcCloseOut">15%</div>
+        <input type="range" id="calcClose" class="calc-slider" min="1" max="50" step="1" value="15" aria-label="Close rate as a percentage" />
+        <div class="calc-scale"><span>1%</span><span>50%</span></div>
+      </div>
+
       <div class="calc-result" aria-live="polite">
         <div class="calc-headline">$<span id="calcYear">135,000</span><span class="calc-per">/year</span></div>
-        <div class="calc-result-label">in new revenue you could be capturing</div>
-        <div class="calc-result-sub"><span id="calcMonth">$11,250</span>/mo &middot; ~4-5 new customers/mo</div>
+        <div class="calc-result-label">in revenue at the numbers you entered</div>
+        <div class="calc-result-sub"><span id="calcMonth">$11,250</span>/mo &middot; <span id="calcCustomers">4.5</span> new customers/mo</div>
       </div>
     </div>
 
-    <p class="calc-note fade-in">Based on <strong>~30 qualified leads a month</strong> at a <strong>15% close rate</strong>, the upper end of the typical industry range for managed lead-gen programs. Your own numbers will vary.</p>
+    <p class="calc-note fade-in">This is arithmetic on the three numbers you set above &mdash; customer value &times; leads &times; close rate &mdash; not a projection of what we would deliver. If you do not know your close rate yet, that is the first thing worth measuring. See <a href="/blog/cost-per-lead-benchmarks" style="color:inherit;text-decoration:underline;">cost per lead benchmarks by industry</a> for realistic starting inputs.</p>
 
     <div class="calc-cta fade-in">
-      <a href="/contact" class="btn-primary">Capture this revenue →</a>
+      <a href="/contact" class="btn-primary">Talk through your numbers →</a>
     </div>
   </div>
 </section>
