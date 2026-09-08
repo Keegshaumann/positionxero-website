@@ -1,6 +1,6 @@
 /* ===================================
-   Position Xero — Global Stylesheet
-   Design: Premium Agency Light — white primary, ink black, refined grey
+   Position Xero: Global Stylesheet
+   Design: Premium Agency Light (white primary, ink black, refined grey)
    =================================== */
 
 /* Fonts are loaded via a non-blocking <link rel="preload"> in each page's <head>
@@ -8,9 +8,9 @@
 
 :root {
   /* Backgrounds */
-  --bg:        #F5F4F1;   /* warm off-white — primary */
-  --bg-2:      #FFFFFF;   /* pure white — alternating sections */
-  --bg-dark:   #0D0D0D;   /* near-black — stats, footer, cta */
+  --bg:        #F5F4F1;   /* warm off-white, primary */
+  --bg-2:      #FFFFFF;   /* pure white, alternating sections */
+  --bg-dark:   #0D0D0D;   /* near-black: stats, footer, cta */
   --bg-card:   #FFFFFF;
   --border:    rgba(0,0,0,0.09);
   --border-h:  rgba(0,0,0,0.28);
@@ -21,10 +21,10 @@
   --muted:     #6B6B6B;   /* body text */
   --muted-2:   #9E9E9E;   /* tertiary */
 
-  /* Light text — for use on dark backgrounds */
+  /* Light text, for use on dark backgrounds */
   --white:     #F5F4F1;
 
-  /* Gradient — refined dark-to-grey */
+  /* Gradient: refined dark-to-grey */
   --gradient:  linear-gradient(135deg, #0D0D0D 0%, #555555 100%);
 
   --font-head: 'Outfit', sans-serif;
@@ -144,7 +144,7 @@ img{ max-width: 100%; height: auto; display: block; }
   box-shadow: 0 8px 28px rgba(0,0,0,0.18);
 }
 
-/* White variant — used on dark backgrounds */
+/* White variant, used on dark backgrounds */
 .btn-white {
   background: #FFFFFF;
   color: var(--ink);
@@ -188,7 +188,7 @@ img{ max-width: 100%; height: auto; display: block; }
 }
 
 /* ===================================
-   DARK-NAV: inner pages have dark headers — flip pre-scroll nav to white
+   DARK-NAV: inner pages have dark headers, so flip pre-scroll nav to white
    =================================== */
 body.dark-nav .nav:not(.scrolled) .nav-logo { color: var(--white); }
 body.dark-nav .nav:not(.scrolled) .nav-links a { color: rgba(245,244,241,0.6); }
@@ -276,7 +276,7 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
 .mobile-menu a:hover { color: var(--muted); }
 
 /* ===================================
-   HERO — clean white/light
+   HERO: clean white/light
    =================================== */
 .hero {
   min-height: 100vh;
@@ -302,7 +302,7 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
   background: radial-gradient(ellipse 70% 50% at 60% 60%, rgba(0,0,0,0.025) 0%, transparent 70%);
 }
 
-/* Orbs — barely visible on light, just texture */
+/* Orbs: barely visible on light, just texture */
 .orb {
   position: absolute;
   border-radius: 50%;
@@ -450,7 +450,7 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
 .service-card:hover .service-link { gap: 9px; }
 
 /* ===================================
-   STATS — dark island
+   STATS: dark island
    =================================== */
 .stats-section {
   background: var(--bg-dark);
@@ -550,7 +550,7 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
 .niche-card h3 { font-size: 0.9rem; font-weight: 700; color: var(--ink); font-family: var(--font-head); }
 
 /* ===================================
-   CTA BANNER — dark for contrast
+   CTA BANNER: dark for contrast
    =================================== */
 .cta-section { padding: 80px 0; }
 
@@ -578,7 +578,7 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
 .cta-banner .btn-primary:hover { background: #F0EFED; box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
 
 /* ===================================
-   FOOTER — dark
+   FOOTER: dark
    =================================== */
 .footer {
   background: var(--bg-dark);
@@ -616,7 +616,7 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
 .footer-legal { white-space: nowrap; }
 
 /* ===================================
-   PAGE HEADER — dark for inner pages
+   PAGE HEADER: dark for inner pages
    =================================== */
 .page-header {
   padding: 160px 0 80px;
@@ -872,6 +872,21 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
   .niches-grid    { grid-template-columns: repeat(2,1fr); }
 }
 
+/* The primary nav carries eight links since /careers/ was added. Tighten the
+   spacing first, drop the phone digits next, then hand over to the mobile menu
+   at 980px, below which eight links cannot fit alongside the phone and CTA. */
+@media (max-width: 1200px) {
+  .nav-links { gap: 20px; }
+}
+@media (max-width: 1060px) {
+  .nav-phone-num { display: none; }
+}
+@media (max-width: 980px) {
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .nav-phone { margin-left: auto; margin-right: 10px; }
+}
+
 @media (max-width: 768px) {
   .nav-links, .nav-cta { display: none; }
   .hamburger { display: flex; }
@@ -967,7 +982,7 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
 }
 
 /* ===================================
-   HERO METRICS — inline stat badges
+   HERO METRICS: inline stat badges
    =================================== */
 .hero-rating { color: #B8860B; letter-spacing: 1px; }
 
@@ -999,7 +1014,7 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
 .hero-metric-div { width: 1px; height: 36px; background: var(--border); flex-shrink: 0; }
 
 /* ===================================
-   RATING STRIP — social proof bar
+   RATING STRIP: social proof bar
    =================================== */
 .rating-strip {
   background: var(--bg-dark);
@@ -1065,7 +1080,7 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
 }
 
 /* ===================================
-   BENEFITS GRID — "Why Us"
+   BENEFITS GRID: "Why Us"
    =================================== */
 .benefits-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
 
@@ -1105,7 +1120,7 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
 }
 
 /* ===================================
-   INTAKE STEPS — CTA process
+   INTAKE STEPS: CTA process
    =================================== */
 .intake-steps {
   display: flex;
@@ -1143,7 +1158,7 @@ body.dark-nav .nav:not(.scrolled) .nav-phone { color: var(--white); }
 }
 
 /* ===================================
-   RESPONSIVE — new components
+   RESPONSIVE: new components
    =================================== */
 @media (max-width: 1024px) {
   .results-grid { grid-template-columns: repeat(2,1fr); }
@@ -1193,7 +1208,7 @@ body.dark-nav .nav:not(.scrolled) a:focus-visible,
   outline-color: #FFFFFF;
 }
 
-/* Skip link — hidden until focused */
+/* Skip link, hidden until focused */
 .skip-link {
   position: absolute;
   left: -9999px;
@@ -1218,12 +1233,11 @@ body.dark-nav .nav:not(.scrolled) a:focus-visible,
 .hamburger {
   min-width: 44px;
   min-height: 44px;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Breadcrumb trail — placed inside the dark page/article header */
+/* Breadcrumb trail, placed inside the dark page/article header */
 .breadcrumb { margin-bottom: 22px; }
 .breadcrumb ol {
   list-style: none;
@@ -1275,7 +1289,7 @@ body.dark-nav .nav:not(.scrolled) a:focus-visible,
     scroll-behavior: auto !important;
   }
   html { scroll-behavior: auto; }
-  /* Reveal fade-in content immediately — no motion for reduced-motion users. */
+  /* Reveal fade-in content immediately: no motion for reduced-motion users. */
   .fade-in { opacity: 1 !important; transform: none !important; }
   #heroGrid { display: none !important; }
   .orb { animation: none !important; }
@@ -1479,7 +1493,7 @@ body.dark-nav .nav:not(.scrolled) a:focus-visible,
 }
 .mobile-menu a.btn-primary:hover { color: #FFFFFF; }
 
-/* In-article lead value calculator (light background — overrides the dark homepage .calc styles) */
+/* In-article lead value calculator (light background, overrides the dark homepage .calc styles) */
 .lv-calc {
   background: var(--bg-2);
   border: 1px solid var(--border);

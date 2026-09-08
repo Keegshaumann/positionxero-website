@@ -1,15 +1,15 @@
-/* Position Xero — main.js */
+/* Position Xero: main.js */
 
-// Cloth-warp grid effect — used on the hero AND every dark "grid" section.
+// Cloth-warp grid effect, used on the hero AND every dark "grid" section.
 (function () {
-  // Respect reduced-motion preferences — skip the animation entirely (static
+  // Respect reduced-motion preferences: skip the animation entirely (static
   // CSS grids stay in place as the fallback).
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   // Geometry / physics (shared)
   const STEPS    = 16;  // polyline segments per line (more = smoother curve)
-  const SIGMA    = 200; // px — radius of cloth depression
-  const STRENGTH = 90;  // px — max inward pull at dead-centre
+  const SIGMA    = 200; // px, radius of cloth depression
+  const STRENGTH = 90;  // px, max inward pull at dead-centre
   const SPRING   = 0.055;
 
   // Attach a warping grid to `host`. opts: { canvas?, cell, color }
@@ -42,7 +42,7 @@
     });
     host.addEventListener('mouseleave', () => { rawX = -9999; rawY = -9999; });
 
-    // Gaussian pull toward cursor — strongest at centre, zero at infinity.
+    // Gaussian pull toward cursor: strongest at centre, zero at infinity.
     function warp(px, py) {
       const dx = px - smX, dy = py - smY, d2 = dx * dx + dy * dy;
       const pull = STRENGTH * Math.exp(-d2 / (2 * SIGMA * SIGMA));
@@ -90,14 +90,14 @@
     } else { start(); }
   }
 
-  // Homepage hero — existing canvas, light section so dark lines.
+  // Homepage hero: existing canvas, light section so dark lines.
   const heroCanvas = document.getElementById('heroGrid');
   if (heroCanvas) {
     const hero = heroCanvas.closest('.hero');
     if (hero) initWarpGrid(hero, { canvas: heroCanvas, cell: 68, color: 'rgba(0,0,0,0.055)' });
   }
 
-  // Every dark "grid" section — inject a canvas, light lines, hide static grid.
+  // Every dark "grid" section: inject a canvas, light lines, hide static grid.
   [['.stats-section', 64], ['.cta-banner', 48], ['.page-header', 72], ['.article-header', 72], ['.calc-section', 64]]
     .forEach(([sel, cell]) => {
       document.querySelectorAll(sel).forEach(host => {
