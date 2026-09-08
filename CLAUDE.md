@@ -83,6 +83,16 @@ Use `BusinessAudience` with `geographicArea` to signal geo targeting — it need
 
 (Prose *advising readers* to add `LocalBusiness` schema to **their own** sites is fine — the ban is on it appearing in this site's own JSON-LD.)
 
+## `/works` and `/cognexa` — rebuilt into this repo 2026-09-08
+
+Both pages were live on positionxero.com but had **never been in this repo**: they were deployed from a separate build (they loaded `/assets/ui-*.css` + `/assets/subpage-*.css`, hashed bundler output, and used a different nav — NEWS / WORKS / ABOUT / COGNEXA). That made them an orphaned island: no repo page linked to them, they linked to none of the money pages, and they were missing from `sitemap.xml` and `llms.txt`.
+
+They have now been rebuilt as hand-written HTML on the normal site template (`/css/style.css`, standard nav + footer, `page-header` hero, visible breadcrumb + BreadcrumbList, WebPage schema) and wired into the footer "Company" column, `sitemap.xml` and `llms.txt`.
+
+**When deploying, make sure the old build's `/works` and `/cognexa` output is removed from the host**, or it may keep winning over `works.html` / `cognexa.html`. Check whether `/assets/` still needs to exist at all.
+
+`works.html` uses the previously-unused `.results-grid` / `.result-card` / `.rc-*` components already in `style.css`, plus a page-scoped `<style>` block for the filter chips and a small inline script for filtering. It deliberately carries **no invented metrics** — the outcome labels ("Online quotes", "Booked hires") are the client-supplied phrasing, which keeps it inside the honest-schema policy above. Do not add `Review`, `AggregateRating`, or fabricated result numbers to it.
+
 ## Other conventions
 
 - All canonical URLs use `https://www.positionxero.com` (https + www).

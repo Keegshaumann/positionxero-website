@@ -2,7 +2,7 @@
 
 > Position Xero is a founder-led performance marketing and lead generation agency serving service businesses in the United States and South Africa. The agency is run from South Africa and delivers all work remotely. Clients work directly with the two co-founders — no account managers — to generate consistent, qualified leads through Google Ads, Meta Ads, SEO, and conversion-focused website design.
 
-> Last updated: 2026-08-04
+> Last updated: 2026-09-08
 
 ## What We Do
 
@@ -39,6 +39,9 @@
 - About: https://www.positionxero.com/about
 - Contact / Book a Free Audit: https://www.positionxero.com/contact
 - FAQ: https://www.positionxero.com/faq
+- How We Work (first 90 days, process): https://www.positionxero.com/how-we-work
+- Our Work (selected client projects): https://www.positionxero.com/works
+- Cognexa (our AI company; AI search optimisation, automation, custom AI builds): https://www.positionxero.com/cognexa
 - Blog: https://www.positionxero.com/blog/
 - Pricing (machine-readable): https://www.positionxero.com/pricing.md
 
