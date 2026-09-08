@@ -1,0 +1,41 @@
+# Deploys the site to Hostinger over FTP on every push to main.
+#
+# Needs three repository secrets (Settings > Secrets and variables > Actions):
+#   FTP_SERVER    e.g. ftp.positionxero.com  (hPanel > Files > FTP Accounts)
+#   FTP_USERNAME  the FTP account username
+#   FTP_PASSWORD  the FTP account password
+#
+# Everything in the repo is uploaded to /public_html/ except the internal
+# files listed under exclude, which must never be served.
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:        # lets you trigger a deploy by hand from the Actions tab
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the site
+        uses: actions/checkout@v4
+
+      - name: Upload changed files to public_html
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /public_html/
+          protocol: ftp
+          # Only changed files are transferred, so deploys after the first are quick.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            seo-tool/**
+            CLAUDE.md
+            SEO-AUDIT.md
+            .gitattributes
+            **/.DS_Store
